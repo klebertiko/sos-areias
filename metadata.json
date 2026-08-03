@@ -1,0 +1,6 @@
+{
+  "name": "Reforma Pista de Skate Areias",
+  "description": "Vaquinha comunitária para a reforma e restauração da Pista de Skate de Areias.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
