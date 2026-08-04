@@ -154,7 +154,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
         {/* Header */}
         <div className="flex justify-between items-center pb-4 border-b border-zinc-800">
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-yellow-500 text-zinc-950 rounded-xl font-mono font-bold">
+            <div className="p-2 bg-red-500 text-zinc-950 rounded-xl font-mono font-bold">
               <Lock size={20} />
             </div>
             <div>
@@ -175,7 +175,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
         {!isAuthenticated ? (
           <form onSubmit={handleLogin} className="space-y-4 py-4 max-w-md mx-auto text-center">
             <div className="p-4 bg-zinc-950 border border-zinc-800 rounded-2xl space-y-2">
-              <ShieldAlert className="text-yellow-400 mx-auto" size={32} />
+              <ShieldAlert className="text-red-400 mx-auto" size={32} />
               <h4 className="font-bold text-white text-base">Acesso Restrito aos Organizadores</h4>
               <p className="text-xs text-zinc-400">
                 Digite a senha de acesso da comissão da Pista de Areias para editar as chaves PIX e cronograma da obra.
@@ -191,7 +191,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                 placeholder="Digite a senha..."
                 value={pinInput}
                 onChange={(e) => setPinInput(e.target.value)}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white font-mono text-sm focus:outline-none focus:border-yellow-500"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white font-mono text-sm focus:outline-none focus:border-red-500"
               />
               {pinError && (
                 <p className="text-xs text-red-400 font-mono">Senha incorreta.</p>
@@ -200,7 +200,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
 
             <button
               type="submit"
-              className="w-full py-3 bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-black text-sm uppercase rounded-xl transition-all shadow-lg"
+              className="w-full py-3 bg-red-500 hover:bg-red-400 text-zinc-950 font-black text-sm uppercase rounded-xl transition-all shadow-lg"
             >
               Entrar no Painel
             </button>
@@ -220,7 +220,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
             {/* General Settings */}
             <div className="bg-zinc-950 p-4 sm:p-5 rounded-2xl border border-zinc-800 space-y-4">
               <h4 className="font-bold text-white text-base flex items-center gap-2">
-                <Key className="text-yellow-400" size={18} />
+                <Key className="text-red-400" size={18} />
                 Chave PIX, Meta e Progresso
               </h4>
 
@@ -233,7 +233,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                     type="text"
                     value={editablePixKey}
                     onChange={(e) => setEditablePixKey(e.target.value)}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-yellow-400 font-mono font-bold focus:outline-none focus:border-yellow-500"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-red-400 font-mono font-bold focus:outline-none focus:border-red-500"
                   />
                   <span className="text-[10px] text-zinc-500 font-mono">Atualiza o QR Code e payload automaticamente.</span>
                 </div>
@@ -246,7 +246,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                     type="number"
                     value={editableGoal}
                     onChange={(e) => setEditableGoal(e.target.value)}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-white font-mono font-bold focus:outline-none focus:border-yellow-500"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-white font-mono font-bold focus:outline-none focus:border-red-500"
                   />
                   <span className="text-[10px] text-zinc-500 font-mono">Meta orçamentária do projeto.</span>
                 </div>
@@ -259,7 +259,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                     type="number"
                     value={editableRaised}
                     onChange={(e) => setEditableRaised(e.target.value)}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-white font-mono font-bold focus:outline-none focus:border-yellow-500"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-white font-mono font-bold focus:outline-none focus:border-red-500"
                   />
                   <span className="text-[10px] text-zinc-500 font-mono">Ajuste manual do progresso (ex: doações recebidas fora do site).</span>
                 </div>
@@ -269,7 +269,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
             {/* Timeline Steps Management */}
             <div className="bg-zinc-950 p-4 sm:p-5 rounded-2xl border border-zinc-800 space-y-4">
               <h4 className="font-bold text-white text-base flex items-center gap-2">
-                <Calendar className="text-yellow-400" size={18} />
+                <Calendar className="text-red-400" size={18} />
                 Gerenciar Cronograma e Etapas
               </h4>
 
@@ -289,7 +289,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                       <select
                         value={step.status}
                         onChange={(e) => handleStatusChange(step.phase, e.target.value as TimelineStep['status'])}
-                        className="bg-zinc-950 border border-zinc-800 rounded-lg px-2 py-1 text-xs text-zinc-200 font-mono focus:outline-none focus:border-yellow-500"
+                        className="bg-zinc-950 border border-zinc-800 rounded-lg px-2 py-1 text-xs text-zinc-200 font-mono focus:outline-none focus:border-red-500"
                       >
                         <option value="concluido">Concluído</option>
                         <option value="em_andamento">Em Andamento</option>
@@ -310,7 +310,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
 
               {/* Add New Step Form */}
               <form onSubmit={handleAddStep} className="pt-3 border-t border-zinc-800/80 space-y-2">
-                <p className="text-xs font-mono font-bold text-yellow-400 uppercase flex items-center gap-1">
+                <p className="text-xs font-mono font-bold text-red-400 uppercase flex items-center gap-1">
                   <Plus size={14} />
                   Adicionar Nova Etapa ao Cronograma:
                 </p>
@@ -354,7 +354,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
             <div className="bg-zinc-950 p-4 sm:p-5 rounded-2xl border border-zinc-800 space-y-4">
               <div className="flex items-center justify-between">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
-                  <Users className="text-yellow-400" size={18} />
+                  <Users className="text-red-400" size={18} />
                   Apoiadores ({supporters.length})
                 </h4>
                 <span className="text-[11px] font-mono text-zinc-400">
@@ -368,7 +368,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
 
               {/* Add Manual Donation Form */}
               <form onSubmit={handleAddDonation} className="bg-zinc-900 border border-zinc-800 p-3 rounded-xl space-y-2">
-                <p className="text-xs font-mono font-bold text-yellow-400 uppercase flex items-center gap-1">
+                <p className="text-xs font-mono font-bold text-red-400 uppercase flex items-center gap-1">
                   <Plus size={14} />
                   Registrar Doação Manual (ex: recebida fora do site):
                 </p>
@@ -417,7 +417,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                         <div className="flex items-center gap-2">
                           <span className="font-bold text-white">{sup.name}</span>
                           {sup.nickname && (
-                            <span className="text-[10px] text-yellow-400 font-mono">"{sup.nickname}"</span>
+                            <span className="text-[10px] text-red-400 font-mono">"{sup.nickname}"</span>
                           )}
                           {editingSupporterId === sup.id ? (
                             <span className="flex items-center gap-1">
@@ -426,7 +426,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                                 autoFocus
                                 value={editingAmount}
                                 onChange={(e) => setEditingAmount(e.target.value)}
-                                className="w-20 bg-zinc-950 border border-yellow-500/50 rounded px-1.5 py-0.5 text-yellow-400 font-mono font-bold text-xs"
+                                className="w-20 bg-zinc-950 border border-red-500/50 rounded px-1.5 py-0.5 text-red-400 font-mono font-bold text-xs"
                               />
                               <button
                                 type="button"
@@ -438,7 +438,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                               </button>
                             </span>
                           ) : (
-                            <span className="bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded font-mono font-bold">
+                            <span className="bg-red-500/20 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-mono font-bold">
                               R$ {sup.amount}
                             </span>
                           )}
@@ -452,7 +452,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                           )}
                           {sup.email && (
                             <span className="flex items-center gap-1 text-zinc-300">
-                              <Mail size={11} className="text-yellow-400" /> {sup.email}
+                              <Mail size={11} className="text-red-400" /> {sup.email}
                             </span>
                           )}
                           <span>Base: {sup.stance}</span>
@@ -463,7 +463,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                       <div className="flex items-center gap-1 self-end sm:self-center">
                         <button
                           onClick={() => handleStartEditAmount(sup)}
-                          className="p-1.5 text-zinc-500 hover:text-yellow-400 hover:bg-zinc-950 rounded-lg transition-colors"
+                          className="p-1.5 text-zinc-500 hover:text-red-400 hover:bg-zinc-950 rounded-lg transition-colors"
                           title="Editar valor da doação"
                         >
                           <Pencil size={16} />
@@ -486,7 +486,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
             <div className="pt-2 text-right">
               <button
                 onClick={handleSaveAll}
-                className="px-6 py-3 bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-black text-sm uppercase rounded-xl transition-all shadow-[0_0_15px_rgba(234,179,8,0.2)] flex items-center gap-2 ml-auto"
+                className="px-6 py-3 bg-red-500 hover:bg-red-400 text-zinc-950 font-black text-sm uppercase rounded-xl transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)] flex items-center gap-2 ml-auto"
               >
                 <Save size={18} />
                 <span>Salvar Todas as Alterações</span>

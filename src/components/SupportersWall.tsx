@@ -48,7 +48,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-zinc-800">
         <div>
           <h3 className="text-2xl font-black text-white flex items-center gap-2">
-            <MessageSquare className="text-yellow-500" size={24} />
+            <MessageSquare className="text-red-500" size={24} />
             Mural da Galera & Mensagens de Apoio
           </h3>
           <p className="text-sm text-zinc-400 mt-1">
@@ -58,7 +58,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
 
         <button
           onClick={onOpenDonation}
-          className="bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500 hover:text-zinc-950 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-1.5"
+          className="bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500 hover:text-zinc-950 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-1.5"
         >
           <Heart size={14} className="fill-current" />
           <span>Fazer Doação para Aparecer no Mural</span>
@@ -68,7 +68,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
       {/* Leave a Support Message Form */}
       <form onSubmit={handleSubmit} className="bg-zinc-950 border border-zinc-800 p-5 rounded-xl space-y-4">
         <h4 className="font-bold text-sm text-white flex items-center gap-2 uppercase tracking-wider font-mono">
-          <Sparkles size={16} className="text-yellow-500" />
+          <Sparkles size={16} className="text-red-500" />
           Deixe seu recado e apoio ao projeto
         </h4>
 
@@ -87,7 +87,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
               placeholder="Ex: João Silva"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-yellow-500 transition-colors"
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-red-500 transition-colors"
             />
           </div>
 
@@ -98,7 +98,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
               placeholder="Ex: Jhow Flip"
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
-              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-yellow-500 transition-colors"
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-red-500 transition-colors"
             />
           </div>
 
@@ -107,7 +107,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
             <select
               value={stance}
               onChange={(e) => setStance(e.target.value as SkateStance)}
-              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-yellow-500 transition-colors"
+              className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-red-500 transition-colors"
             >
               <option value="Regular">Regular</option>
               <option value="Goofy">Goofy</option>
@@ -125,7 +125,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
             placeholder="Mande um salve pra rapaziada do pico ou conte uma lembrança da pista..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-yellow-500 transition-colors resize-none"
+            className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-red-500 transition-colors resize-none"
           />
         </div>
 
@@ -135,7 +135,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
           </span>
           <button
             type="submit"
-            className="bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-black px-5 py-2 rounded-lg text-xs uppercase tracking-wider transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5"
+            className="bg-red-500 hover:bg-red-400 text-zinc-950 font-black px-5 py-2 rounded-lg text-xs uppercase tracking-wider transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5"
           >
             <Send size={14} />
             <span>Publicar Recado</span>
@@ -147,14 +147,14 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
       <div className="space-y-3">
         {supporters.length === 0 ? (
           <div className="bg-zinc-950/60 border border-dashed border-zinc-800 p-8 rounded-xl text-center space-y-2">
-            <Sparkles size={28} className="text-yellow-500 mx-auto" />
+            <Sparkles size={28} className="text-red-500 mx-auto" />
             <h5 className="font-bold text-white text-base">Seja o primeiro a apoiar a pista de Areias!</h5>
             <p className="text-xs text-zinc-400 max-w-md mx-auto">
               Faça sua doação via PIX para inaugurar o mural de apoiadores e ajudar a transformar a reforma em realidade.
             </p>
             <button
               onClick={onOpenDonation}
-              className="mt-3 inline-flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-black px-4 py-2 rounded-lg text-xs uppercase tracking-wider transition-all"
+              className="mt-3 inline-flex items-center gap-2 bg-red-500 hover:bg-red-400 text-zinc-950 font-black px-4 py-2 rounded-lg text-xs uppercase tracking-wider transition-all"
             >
               <Heart size={14} className="fill-current" />
               <span>Apoiar Agora</span>
@@ -168,14 +168,14 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
             >
               <div className="flex justify-between items-start gap-2">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 flex items-center justify-center font-mono font-bold text-xs uppercase">
+                  <div className="w-8 h-8 rounded-lg bg-red-500/20 text-red-400 border border-red-500/30 flex items-center justify-center font-mono font-bold text-xs uppercase">
                     {sup.name.substring(0, 2)}
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
                       <h5 className="font-bold text-sm text-white">{sup.name}</h5>
                       {sup.nickname && (
-                        <span className="text-xs text-yellow-400/90 font-mono font-semibold">
+                        <span className="text-xs text-red-400/90 font-mono font-semibold">
                           "{sup.nickname}"
                         </span>
                       )}
@@ -190,7 +190,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
                   </div>
                 </div>
 
-                <span className="font-mono font-black text-sm text-yellow-400 bg-yellow-500/10 px-2.5 py-1 rounded-md border border-yellow-500/20">
+                <span className="font-mono font-black text-sm text-red-400 bg-red-500/10 px-2.5 py-1 rounded-md border border-red-500/20">
                   Apoiou com R$ {sup.amount}
                 </span>
               </div>
@@ -202,7 +202,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
               <div className="pl-10 pt-1 flex justify-end">
                 <button
                   onClick={() => onLikeSupporter(sup.id)}
-                  className="text-xs font-mono text-zinc-400 hover:text-yellow-400 flex items-center gap-1.5 transition-colors bg-zinc-900 px-2.5 py-1 rounded-lg border border-zinc-800"
+                  className="text-xs font-mono text-zinc-400 hover:text-red-400 flex items-center gap-1.5 transition-colors bg-zinc-900 px-2.5 py-1 rounded-lg border border-zinc-800"
                 >
                   <ThumbsUp size={13} className="hover:scale-110 transition-transform" />
                   <span>{sup.likes} Salves</span>

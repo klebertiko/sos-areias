@@ -15,12 +15,12 @@
       0 3px 0 0 #18181b;
   }
 
-  .pixel-border-yellow {
+  .pixel-border-red {
     box-shadow: 
-      -3px 0 0 0 #eab308,
-      3px 0 0 0 #eab308,
-      0 -3px 0 0 #eab308,
-      0 3px 0 0 #eab308;
+      -3px 0 0 0 #ef4444,
+      3px 0 0 0 #ef4444,
+      0 -3px 0 0 #ef4444,
+      0 3px 0 0 #ef4444;
   }
 }
 
@@ -40,7 +40,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #eab308;
+  background: #ef4444;
 }
 
 /* Retro scanline background texture overlay */

@@ -11,7 +11,7 @@ export const AboutProject: React.FC = () => {
 
       <div className="space-y-2 pb-4 border-b border-zinc-800">
         <h3 className="text-2xl font-black text-white flex items-center gap-2">
-          <Users className="text-yellow-500" size={24} />
+          <Users className="text-red-500" size={24} />
           Quem está por trás dessa reforma?
         </h3>
         <p className="text-sm text-zinc-400">
@@ -27,10 +27,10 @@ export const AboutProject: React.FC = () => {
         {PROJECT_PARTNERS.map((partner) => (
           <div key={partner.id} className="bg-zinc-950 border border-zinc-800 p-5 rounded-xl space-y-2">
             <div className="flex items-center gap-2">
-              <Handshake size={16} className="text-yellow-500 shrink-0" />
+              <Handshake size={16} className="text-red-500 shrink-0" />
               <span className="font-bold text-white">{partner.name}</span>
             </div>
-            <span className="text-xs font-mono uppercase text-yellow-400/90">{partner.role}</span>
+            <span className="text-xs font-mono uppercase text-red-400/90">{partner.role}</span>
             <p className="text-sm text-zinc-400 leading-snug">{partner.description}</p>
           </div>
         ))}
@@ -39,7 +39,7 @@ export const AboutProject: React.FC = () => {
       {/* Sponsor tiers for companies */}
       <div className="bg-zinc-950 border border-zinc-800 p-5 rounded-xl space-y-3">
         <div className="flex items-center gap-2">
-          <Award size={16} className="text-yellow-500 shrink-0" />
+          <Award size={16} className="text-red-500 shrink-0" />
           <span className="font-bold text-white text-sm">Empresa quer apoiar? Existem cotas de patrocínio</span>
         </div>
         <p className="text-xs text-zinc-400 leading-relaxed">
@@ -48,7 +48,7 @@ export const AboutProject: React.FC = () => {
         <div className="flex flex-wrap gap-2 text-xs font-mono">
           {SPONSOR_TIERS.map((tier) => (
             <span key={tier.id} className="bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-lg text-zinc-300">
-              <strong className="text-yellow-400">{tier.label}</strong> · {tier.range}
+              <strong className="text-red-400">{tier.label}</strong> · {tier.range}
             </span>
           ))}
         </div>
@@ -75,7 +75,7 @@ export const AboutProject: React.FC = () => {
       <div className="flex flex-wrap items-center gap-2">
         {SOCIAL_LINKS.map((link) => (
           <a key={link.id} href={link.url} target="_blank" rel="noopener noreferrer" className={linkPillClass}>
-            <Instagram size={13} className="text-yellow-500" />
+            <Instagram size={13} className="text-red-500" />
             {link.handle}
           </a>
         ))}

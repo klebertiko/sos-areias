@@ -84,11 +84,11 @@ export function drawPixelQrCode(canvas: HTMLCanvasElement, text: string) {
   // Center mini skate logo
   const centerSize = cellSize * 5;
   const centerPos = (size - centerSize) / 2;
-  ctx.fillStyle = '#eab308'; // yellow-500
+  ctx.fillStyle = '#ef4444'; // red-500
   ctx.fillRect(centerPos - 2, centerPos - 2, centerSize + 4, centerSize + 4);
   ctx.fillStyle = '#09090b';
   ctx.fillRect(centerPos, centerPos, centerSize, centerSize);
-  ctx.fillStyle = '#eab308';
+  ctx.fillStyle = '#ef4444';
   // Small pixel skate deck shape
   ctx.fillRect(centerPos + cellSize, centerPos + cellSize * 2, cellSize * 3, cellSize);
 }

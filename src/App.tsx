@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Heart, Hammer, Share2, Sparkles, Volume2, VolumeX, ShieldCheck, Lock } from 'lucide-react';
+import { Heart, Hammer, Share2, Sparkles, Volume2, VolumeX, ShieldCheck, Lock, Linkedin, Globe } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { AboutProject } from './components/AboutProject';
@@ -147,7 +147,7 @@ export default function App() {
   }, [supporters]);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-yellow-500 selection:text-zinc-950 relative">
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-red-500 selection:text-zinc-950 relative">
       
       {/* Top Navbar */}
       <Navbar
@@ -209,7 +209,7 @@ export default function App() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           
           <div className="flex items-center gap-2">
-            <div className="bg-yellow-500 text-zinc-950 p-1.5 rounded-lg font-mono font-black">
+            <div className="bg-red-500 text-zinc-950 p-1.5 rounded-lg font-mono font-black">
               <Hammer size={16} />
             </div>
             <div>
@@ -221,7 +221,7 @@ export default function App() {
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono">
             <button
               onClick={() => setIsPrivacyOpen(true)}
-              className="hover:text-yellow-400 transition-colors flex items-center gap-1"
+              className="hover:text-red-400 transition-colors flex items-center gap-1"
             >
               <ShieldCheck size={14} />
               <span>Privacidade & LGPD</span>
@@ -229,7 +229,7 @@ export default function App() {
 
             <button
               onClick={() => setIsAdminOpen(true)}
-              className="hover:text-yellow-400 transition-colors flex items-center gap-1 text-zinc-400 hover:bg-zinc-900 px-2.5 py-1 rounded-lg border border-zinc-800"
+              className="hover:text-red-400 transition-colors flex items-center gap-1 text-zinc-400 hover:bg-zinc-900 px-2.5 py-1 rounded-lg border border-zinc-800"
             >
               <Lock size={13} />
               <span>Painel do Coletivo</span>
@@ -237,13 +237,35 @@ export default function App() {
           </div>
 
         </div>
+
+        <div className="max-w-6xl mx-auto mt-6 pt-4 border-t border-zinc-900 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] text-zinc-500">
+          <span>Desenvolvido por <strong className="text-zinc-300 font-semibold">Kleber Almeida Toyota</strong></span>
+          <a
+            href="https://br.linkedin.com/in/kleber-almeida-toyota"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red-400 transition-colors flex items-center gap-1"
+          >
+            <Linkedin size={12} />
+            <span>LinkedIn</span>
+          </a>
+          <a
+            href="https://klebertiko.github.io/klebertiko/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-red-400 transition-colors flex items-center gap-1"
+          >
+            <Globe size={12} />
+            <span>Portfólio</span>
+          </a>
+        </div>
       </footer>
 
       {/* Mobile Sticky Bottom Floating CTA */}
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 lg:hidden z-40">
         <button
           onClick={() => handleOpenDonation('50')}
-          className="w-full bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-black text-base py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(234,179,8,0.3)] active:scale-95 transition-all"
+          className="w-full bg-red-500 hover:bg-red-400 text-zinc-950 font-black text-base py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(239,68,68,0.3)] active:scale-95 transition-all"
         >
           <Heart className="fill-current" size={20} />
           <span>Apoiar no PIX (R$ 50)</span>

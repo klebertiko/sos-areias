@@ -49,7 +49,7 @@ export const BudgetBreakdown: React.FC<BudgetBreakdownProps> = ({ items, totalGo
       {/* Header */}
       <div className="space-y-2 pb-4 border-b border-zinc-800">
         <h3 className="text-2xl font-black text-white flex items-center gap-2">
-          <Target className="text-yellow-500" size={24} />
+          <Target className="text-red-500" size={24} />
           Transparência: Onde cada centavo será investido?
         </h3>
         <p className="text-sm text-zinc-400">
@@ -62,9 +62,9 @@ export const BudgetBreakdown: React.FC<BudgetBreakdownProps> = ({ items, totalGo
         <div className="bg-zinc-950 border border-zinc-800 p-4 rounded-xl flex items-center justify-between">
           <div>
             <span className="text-xs text-zinc-400 font-mono block">Meta Total Prevista</span>
-            <span className="text-xl font-black text-yellow-400 font-mono">{fmtBRL(totalGoal)}</span>
+            <span className="text-xl font-black text-red-400 font-mono">{fmtBRL(totalGoal)}</span>
           </div>
-          <PieChart className="text-yellow-500/40" size={24} />
+          <PieChart className="text-red-500/40" size={24} />
         </div>
 
         <div className="bg-zinc-950 border border-zinc-800 p-4 rounded-xl flex items-center justify-between">
@@ -88,10 +88,10 @@ export const BudgetBreakdown: React.FC<BudgetBreakdownProps> = ({ items, totalGo
       <div className="bg-zinc-950 border border-zinc-800 p-4 rounded-xl space-y-3">
         <div className="flex items-center justify-between text-xs font-mono">
           <span className="text-zinc-300 font-bold uppercase flex items-center gap-1.5">
-            <PieChart size={14} className="text-yellow-400" />
+            <PieChart size={14} className="text-red-400" />
             Distribuição do Orçamento (100% do valor)
           </span>
-          <span className="text-yellow-400 font-bold">Total: {fmtBRL(totalGoal)}</span>
+          <span className="text-red-400 font-bold">Total: {fmtBRL(totalGoal)}</span>
         </div>
 
         {/* Stacked Bar Fill */}
@@ -161,7 +161,7 @@ export const BudgetBreakdown: React.FC<BudgetBreakdownProps> = ({ items, totalGo
                         <CheckCircle2 size={12} /> Comprado / Financiado
                       </span>
                     ) : item.status === 'em_andamento' ? (
-                      <span className="text-yellow-400 flex items-center gap-1">
+                      <span className="text-red-400 flex items-center gap-1">
                         <Clock size={12} /> Em Cotação
                       </span>
                     ) : (
@@ -191,7 +191,7 @@ export const BudgetBreakdown: React.FC<BudgetBreakdownProps> = ({ items, totalGo
       </div>
 
       {/* Note about execution model */}
-      <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl text-xs text-yellow-300/90 leading-relaxed font-medium">
+      <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-xs text-red-300/90 leading-relaxed font-medium">
         💬 <strong>Execução Profissional + Mutirão:</strong> Lapidar e resinar o concreto exige equipamento e mão de obra especializada, por isso parte do valor cobre a equipe técnica da Ruaria Skateparks. A comunidade contribui com mutirões de apoio — limpeza, logística, alimentação e divulgação.
       </div>
 

@@ -91,7 +91,7 @@ export const PixModal: React.FC<PixModalProps> = ({
         {/* Header */}
         <div className="p-4 sm:p-5 border-b border-zinc-800 flex justify-between items-center bg-zinc-950">
           <div className="flex items-center gap-2">
-            <div className="bg-yellow-500 text-zinc-950 p-2 rounded-xl">
+            <div className="bg-red-500 text-zinc-950 p-2 rounded-xl">
               <Heart className="fill-current" size={20} />
             </div>
             <div>
@@ -123,7 +123,7 @@ export const PixModal: React.FC<PixModalProps> = ({
                   onClick={() => setAmount(preset)}
                   className={`py-2 rounded-xl font-mono font-bold text-xs sm:text-sm transition-all border ${
                     amount === preset
-                      ? 'bg-yellow-500 text-zinc-950 border-yellow-400 shadow-[0_0_10px_rgba(234,179,8,0.3)]'
+                      ? 'bg-red-500 text-zinc-950 border-red-400 shadow-[0_0_10px_rgba(239,68,68,0.3)]'
                       : 'bg-zinc-950 text-zinc-300 border-zinc-800 hover:border-zinc-700'
                   }`}
                 >
@@ -133,7 +133,7 @@ export const PixModal: React.FC<PixModalProps> = ({
             </div>
 
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 font-mono font-bold text-yellow-500 text-sm">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 font-mono font-bold text-red-500 text-sm">
                 R$
               </span>
               <input
@@ -142,7 +142,7 @@ export const PixModal: React.FC<PixModalProps> = ({
                 placeholder="Qualquer outro valor livre..."
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl pl-10 pr-4 py-2.5 font-mono text-white text-base focus:outline-none focus:border-yellow-500 transition-colors"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl pl-10 pr-4 py-2.5 font-mono text-white text-base focus:outline-none focus:border-red-500 transition-colors"
               />
             </div>
           </div>
@@ -162,7 +162,7 @@ export const PixModal: React.FC<PixModalProps> = ({
               <p className="text-xs text-zinc-400 font-mono">
                 Escaneie o QR Code no app do banco ou utilize as opções de cópia abaixo:
               </p>
-              <div className="bg-zinc-900 border border-zinc-800/80 p-2.5 rounded-xl text-xs font-mono text-yellow-400 font-bold select-all break-all">
+              <div className="bg-zinc-900 border border-zinc-800/80 p-2.5 rounded-xl text-xs font-mono text-red-400 font-bold select-all break-all">
                 {pixKey}
               </div>
             </div>
@@ -192,7 +192,7 @@ export const PixModal: React.FC<PixModalProps> = ({
                 className={`py-2.5 px-3 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5 border ${
                   copied
                     ? 'bg-green-500/20 text-green-400 border-green-500/40'
-                    : 'bg-yellow-500 hover:bg-yellow-400 text-zinc-950 border-yellow-400 shadow-md font-extrabold'
+                    : 'bg-red-500 hover:bg-red-400 text-zinc-950 border-red-400 shadow-md font-extrabold'
                 }`}
               >
                 {copied ? <CheckCircle2 size={15} /> : <QrCode size={15} />}
@@ -204,7 +204,7 @@ export const PixModal: React.FC<PixModalProps> = ({
           {/* Detailed Form for Instant Confirmation */}
           <form onSubmit={handleSimulatePayment} className="space-y-4 bg-zinc-950/80 p-4 sm:p-5 border border-zinc-800 rounded-2xl">
             <div className="border-b border-zinc-800 pb-2">
-              <p className="text-xs font-mono text-yellow-400 font-bold uppercase flex items-center gap-1.5">
+              <p className="text-xs font-mono text-red-400 font-bold uppercase flex items-center gap-1.5">
                 <Sparkles size={15} />
                 2. Cadastro para o Mural de Apoiadores:
               </p>
@@ -224,7 +224,7 @@ export const PixModal: React.FC<PixModalProps> = ({
                     placeholder="Ex: João da Silva"
                     value={donorName}
                     onChange={(e) => setDonorName(e.target.value)}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-yellow-500"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-red-500"
                   />
                 </div>
               </div>
@@ -236,7 +236,7 @@ export const PixModal: React.FC<PixModalProps> = ({
                   placeholder='Ex: "Flip"'
                   value={donorNickname}
                   onChange={(e) => setDonorNickname(e.target.value)}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-yellow-500"
+                  className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500"
                 />
               </div>
             </div>
@@ -252,7 +252,7 @@ export const PixModal: React.FC<PixModalProps> = ({
                     placeholder="(48) 99999-9999"
                     value={donorPhone}
                     onChange={(e) => setDonorPhone(e.target.value)}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-yellow-500"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-red-500"
                   />
                 </div>
               </div>
@@ -266,7 +266,7 @@ export const PixModal: React.FC<PixModalProps> = ({
                     placeholder="seuemail@exemplo.com"
                     value={donorEmail}
                     onChange={(e) => setDonorEmail(e.target.value)}
-                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-yellow-500"
+                    className="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-red-500"
                   />
                 </div>
               </div>
@@ -278,7 +278,7 @@ export const PixModal: React.FC<PixModalProps> = ({
               <select
                 value={donorStance}
                 onChange={(e) => setDonorStance(e.target.value as SkateStance)}
-                className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-yellow-500"
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500"
               >
                 <option value="Regular">Regular</option>
                 <option value="Goofy">Goofy</option>
@@ -295,7 +295,7 @@ export const PixModal: React.FC<PixModalProps> = ({
                 placeholder="Ex: Força Areias! A pista vai ficar incrível."
                 value={donorMessage}
                 onChange={(e) => setDonorMessage(e.target.value)}
-                className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-yellow-500"
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-red-500"
               />
             </div>
 
@@ -306,7 +306,7 @@ export const PixModal: React.FC<PixModalProps> = ({
                 id="lgpdConsentCheck"
                 checked={agreedLgpd}
                 onChange={(e) => setAgreedLgpd(e.target.checked)}
-                className="mt-0.5 rounded accent-yellow-500"
+                className="mt-0.5 rounded accent-red-500"
               />
               <label htmlFor="lgpdConsentCheck" className="text-[10px] text-zinc-400 leading-tight">
                 Concordo com o uso dos meus dados de contato (WhatsApp/Email) para envio de confirmações da doação (LGPD Lei nº 13.709/2018).
@@ -316,7 +316,7 @@ export const PixModal: React.FC<PixModalProps> = ({
             <button
               type="submit"
               disabled={simulating || numericAmount <= 0 || !agreedLgpd}
-              className="w-full bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-black py-3 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-[0_0_15px_rgba(234,179,8,0.2)] disabled:opacity-50 flex items-center justify-center gap-2 text-sm uppercase tracking-wide"
+              className="w-full bg-red-500 hover:bg-red-400 text-zinc-950 font-black py-3 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-[0_0_15px_rgba(239,68,68,0.2)] disabled:opacity-50 flex items-center justify-center gap-2 text-sm uppercase tracking-wide"
             >
               {simulating ? (
                 <span className="font-mono text-xs animate-pulse">Registrando PIX...</span>

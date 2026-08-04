@@ -11,7 +11,7 @@ export const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ steps }) => {
     <section className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-8 space-y-6">
       <div>
         <h3 className="text-2xl font-black text-white flex items-center gap-2">
-          <Zap className="text-yellow-500" size={24} />
+          <Zap className="text-red-500" size={24} />
           Cronograma das Obras e Etapas
         </h3>
         <p className="text-sm text-zinc-400 mt-1">
@@ -32,7 +32,7 @@ export const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ steps }) => {
                   isDone
                     ? 'bg-green-500 border-green-400 text-zinc-950'
                     : isActive
-                    ? 'bg-yellow-500 border-yellow-400 text-zinc-950 animate-pulse'
+                    ? 'bg-red-500 border-red-400 text-zinc-950 animate-pulse'
                     : 'bg-zinc-950 border-zinc-700 text-zinc-500'
                 }`}
               >
@@ -46,7 +46,7 @@ export const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ steps }) => {
               {/* Card Content */}
               <div className="bg-zinc-950 border border-zinc-800/80 p-5 rounded-xl space-y-2 hover:border-zinc-700 transition-colors">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-xs font-mono text-yellow-400 font-bold uppercase tracking-wider flex items-center gap-1">
+                  <span className="text-xs font-mono text-red-400 font-bold uppercase tracking-wider flex items-center gap-1">
                     <Calendar size={13} />
                     {step.date}
                   </span>
@@ -56,7 +56,7 @@ export const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ steps }) => {
                       isDone
                         ? 'bg-green-500/10 text-green-400 border-green-500/30'
                         : isActive
-                        ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30'
+                        ? 'bg-red-500/10 text-red-400 border-red-500/30'
                         : 'bg-zinc-800 text-zinc-400 border-zinc-700'
                     }`}
                   >

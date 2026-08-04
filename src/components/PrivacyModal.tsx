@@ -27,7 +27,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
         {/* Header */}
         <div className="flex justify-between items-center pb-4 border-b border-zinc-800">
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-yellow-500/10 text-yellow-400 rounded-xl border border-yellow-500/20">
+            <div className="p-2 bg-red-500/10 text-red-400 rounded-xl border border-red-500/20">
               <ShieldCheck size={22} />
             </div>
             <div>
@@ -52,7 +52,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
               onClick={() => setActiveTab(tab.id)}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold font-mono uppercase transition-colors border ${
                 activeTab === tab.id
-                  ? 'bg-yellow-500 text-zinc-950 border-yellow-500'
+                  ? 'bg-red-500 text-zinc-950 border-red-500'
                   : 'bg-zinc-950 text-zinc-400 border-zinc-800 hover:text-white hover:border-zinc-700'
               }`}
             >
@@ -68,7 +68,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
             <>
               <div className="bg-zinc-950 p-4 rounded-xl border border-zinc-800 space-y-2">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
-                  <Scale size={16} className="text-yellow-400" />
+                  <Scale size={16} className="text-red-400" />
                   1. O que é o S.O.S Areias
                 </h4>
                 <p className="text-xs text-zinc-400">
@@ -78,7 +78,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
 
               <div className="space-y-2">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
-                  <Heart size={16} className="text-yellow-400" />
+                  <Heart size={16} className="text-red-400" />
                   2. Natureza das Doações
                 </h4>
                 <ul className="list-disc pl-5 space-y-1.5 text-xs text-zinc-300">
@@ -90,7 +90,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
 
               <div className="space-y-2">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
-                  <FileText size={16} className="text-yellow-400" />
+                  <FileText size={16} className="text-red-400" />
                   3. Conteúdo e Uso do Site
                 </h4>
                 <p className="text-xs text-zinc-400">
@@ -100,11 +100,11 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
 
               <div className="bg-zinc-950 p-4 rounded-xl border border-zinc-800 space-y-2">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
-                  <Mail size={16} className="text-yellow-400" />
+                  <Mail size={16} className="text-red-400" />
                   4. Contato
                 </h4>
                 <p className="text-xs text-zinc-400">
-                  Dúvidas sobre estes termos podem ser enviadas para: <strong className="text-yellow-400">{pixKey}</strong>.
+                  Dúvidas sobre estes termos podem ser enviadas para: <strong className="text-red-400">{pixKey}</strong>.
                 </p>
               </div>
             </>
@@ -114,7 +114,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
             <>
               <div className="bg-zinc-950 p-4 rounded-xl border border-zinc-800 space-y-2">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
-                  <Lock size={16} className="text-yellow-400" />
+                  <Lock size={16} className="text-red-400" />
                   1. Compromisso com a Transparência e Segurança
                 </h4>
                 <p className="text-xs text-zinc-400">
@@ -124,7 +124,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
 
               <div className="space-y-2">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
-                  <FileText size={16} className="text-yellow-400" />
+                  <FileText size={16} className="text-red-400" />
                   2. Dados Coletados e Finalidades do Tratamento
                 </h4>
                 <ul className="list-disc pl-5 space-y-1.5 text-xs text-zinc-300">
@@ -140,7 +140,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
 
               <div className="space-y-2">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
-                  <Trash2 size={16} className="text-yellow-400" />
+                  <Trash2 size={16} className="text-red-400" />
                   3. Direitos do Titular dos Dados (Seus Direitos)
                 </h4>
                 <p className="text-xs text-zinc-400">
@@ -156,11 +156,11 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
 
               <div className="bg-zinc-950 p-4 rounded-xl border border-zinc-800 space-y-2">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
-                  <Mail size={16} className="text-yellow-400" />
+                  <Mail size={16} className="text-red-400" />
                   4. Contato do Encarregado / Coletivo
                 </h4>
                 <p className="text-xs text-zinc-400">
-                  Para exercer seus direitos de privacidade ou tirar dúvidas sobre o tratamento de dados, entre em contato diretamente com os organizadores através do e-mail: <strong className="text-yellow-400">{pixKey}</strong>.
+                  Para exercer seus direitos de privacidade ou tirar dúvidas sobre o tratamento de dados, entre em contato diretamente com os organizadores através do e-mail: <strong className="text-red-400">{pixKey}</strong>.
                 </p>
               </div>
             </>
@@ -170,7 +170,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
             <>
               <div className="bg-zinc-950 p-4 rounded-xl border border-zinc-800 space-y-2">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
-                  <Cookie size={16} className="text-yellow-400" />
+                  <Cookie size={16} className="text-red-400" />
                   1. Este site não usa cookies de rastreamento
                 </h4>
                 <p className="text-xs text-zinc-400">
@@ -180,11 +180,11 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
 
               <div className="space-y-2">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
-                  <Database size={16} className="text-yellow-400" />
+                  <Database size={16} className="text-red-400" />
                   2. Armazenamento Local (localStorage)
                 </h4>
                 <p className="text-xs text-zinc-400">
-                  Para o site funcionar sem um backend, usamos o armazenamento local do seu navegador (<code className="text-yellow-400/90">localStorage</code>) — não são cookies HTTP, e os dados nunca saem do seu dispositivo. É o que guarda:
+                  Para o site funcionar sem um backend, usamos o armazenamento local do seu navegador (<code className="text-red-400/90">localStorage</code>) — não são cookies HTTP, e os dados nunca saem do seu dispositivo. É o que guarda:
                 </p>
                 <ul className="list-disc pl-5 space-y-1 text-xs text-zinc-300">
                   <li><strong>Total arrecadado e meta</strong> — para manter a barra de progresso atualizada entre visitas.</li>
@@ -196,7 +196,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
 
               <div className="space-y-2">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
-                  <Trash2 size={16} className="text-yellow-400" />
+                  <Trash2 size={16} className="text-red-400" />
                   3. Como remover
                 </h4>
                 <p className="text-xs text-zinc-400">
@@ -212,7 +212,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
         <div className="pt-2 border-t border-zinc-800 text-right">
           <button
             onClick={onClose}
-            className="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-black text-xs uppercase rounded-xl transition-all"
+            className="px-5 py-2.5 bg-red-500 hover:bg-red-400 text-zinc-950 font-black text-xs uppercase rounded-xl transition-all"
           >
             Entendido, Fechar
           </button>

@@ -27,7 +27,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
           <div>
             <p className="text-xs font-mono uppercase tracking-wider text-zinc-400">Total Arrecadado</p>
             <p className="text-3xl sm:text-4xl font-black text-white tracking-tight flex items-center gap-1">
-              <span className="text-yellow-500 font-mono text-2xl">R$</span>
+              <span className="text-red-500 font-mono text-2xl">R$</span>
               {raised.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
             </p>
           </div>
@@ -42,7 +42,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         {/* Progress Bar Container */}
         <div className="relative w-full bg-zinc-950 rounded-full h-5 p-1 border border-zinc-800 overflow-hidden my-3">
           <div
-            className="bg-gradient-to-r from-yellow-600 to-yellow-400 h-full rounded-full transition-all duration-700 relative shadow-[0_0_12px_rgba(234,179,8,0.5)]"
+            className="bg-gradient-to-r from-red-600 to-red-400 h-full rounded-full transition-all duration-700 relative shadow-[0_0_12px_rgba(239,68,68,0.5)]"
             style={{ width: `${progressPercent}%` }}
           >
             {/* Shimmer line */}
@@ -51,9 +51,9 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         </div>
 
         <div className="flex justify-between items-center text-xs font-mono font-bold text-zinc-400">
-          <span className="text-yellow-400">{progressPercent.toFixed(1)}% ALCANÇADO</span>
+          <span className="text-red-400">{progressPercent.toFixed(1)}% ALCANÇADO</span>
           <span className="flex items-center gap-1 text-zinc-300">
-            <Users size={14} className="text-yellow-500" />
+            <Users size={14} className="text-red-500" />
             {supporterCount} Apoiadores
           </span>
         </div>
@@ -63,7 +63,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       <div className="space-y-3">
         <button
           onClick={() => onOpenDonation()}
-          className="w-full bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-black text-lg py-4 rounded-xl flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(234,179,8,0.25)]"
+          className="w-full bg-red-500 hover:bg-red-400 text-zinc-950 font-black text-lg py-4 rounded-xl flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(239,68,68,0.25)]"
         >
           <Heart className="fill-current" size={22} />
           <span>Fazer Doação via PIX</span>

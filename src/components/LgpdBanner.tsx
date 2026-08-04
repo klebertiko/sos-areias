@@ -27,12 +27,12 @@ export const LgpdBanner: React.FC<LgpdBannerProps> = ({ onOpenPrivacy }) => {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         
         <div className="flex items-start gap-3 max-w-3xl">
-          <div className="p-2 bg-yellow-500/10 text-yellow-400 rounded-xl border border-yellow-500/20 shrink-0 mt-0.5">
+          <div className="p-2 bg-red-500/10 text-red-400 rounded-xl border border-red-500/20 shrink-0 mt-0.5">
             <Cookie size={20} />
           </div>
           <div className="text-xs text-zinc-300 leading-relaxed space-y-1">
             <p className="font-bold text-white flex items-center gap-1.5">
-              <ShieldCheck size={14} className="text-yellow-400" />
+              <ShieldCheck size={14} className="text-red-400" />
               Respeito à LGPD (Lei Geral de Proteção de Dados - Lei 13.709/2018)
             </p>
             <p className="text-zinc-400">
@@ -58,7 +58,7 @@ export const LgpdBanner: React.FC<LgpdBannerProps> = ({ onOpenPrivacy }) => {
 
           <button
             onClick={() => handleAccept('all')}
-            className="px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-zinc-950 text-xs font-black rounded-xl transition-all shadow-[0_0_10px_rgba(234,179,8,0.2)]"
+            className="px-4 py-2 bg-red-500 hover:bg-red-400 text-zinc-950 text-xs font-black rounded-xl transition-all shadow-[0_0_10px_rgba(239,68,68,0.2)]"
           >
             Aceitar Todos
           </button>

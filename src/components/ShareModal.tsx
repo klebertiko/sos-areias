@@ -31,7 +31,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose }) => {
         
         <div className="flex justify-between items-center pb-3 border-b border-zinc-800">
           <h3 className="font-bold text-white text-lg flex items-center gap-2">
-            <Share2 className="text-yellow-500" size={20} />
+            <Share2 className="text-red-500" size={20} />
             Compartilhar Vaquinha
           </h3>
           <button

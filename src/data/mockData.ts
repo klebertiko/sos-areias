@@ -31,7 +31,7 @@ import muralArte from '../assets/images/track-photos/mural-arte.webp';
 import muralArteThumb from '../assets/images/track-photos/mural-arte-thumb.webp';
 
 export const INITIAL_GOAL = 55370;
-export const INITIAL_RAISED = 0;
+export const INITIAL_RAISED = 5206.70;
 export const DEFAULT_PIX_KEY = "areias.plaza@gmail.com";
 
 export const TRACK_PHOTOS: TrackPhoto[] = [

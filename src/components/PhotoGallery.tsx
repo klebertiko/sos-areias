@@ -32,7 +32,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
     <div className="space-y-3">
       <div className="flex items-center gap-2">
         <h4 className="font-bold text-white text-sm flex items-center gap-2">
-          <Camera size={16} className="text-yellow-500" />
+          <Camera size={16} className="text-red-500" />
           Como a pista está hoje
         </h4>
       </div>
@@ -42,7 +42,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
           <button
             key={photo.id}
             onClick={() => setActiveIndex(index)}
-            className="group relative aspect-square rounded-lg overflow-hidden border border-zinc-800 hover:border-yellow-500/60 transition-colors"
+            className="group relative aspect-square rounded-lg overflow-hidden border border-zinc-800 hover:border-red-500/60 transition-colors"
           >
             <img
               src={photo.thumb}
