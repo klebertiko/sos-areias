@@ -176,6 +176,13 @@ export default function App() {
     setSupporters((prev) => prev.map((s) => (s.id === id ? { ...s, ...updates } : s)));
   }, [supporters, adminPasscode]);
 
+  const handleAdminAuthenticated = useCallback((passcode: string) => {
+    setAdminPasscode(passcode);
+    fetchState(passcode)
+      .then((state) => setSupporters(state.supporters))
+      .catch((err) => console.warn('Falha ao carregar dados de contato dos apoiadores:', err));
+  }, []);
+
   const handleSaveAdminState = useCallback((data: { pixKey: string; goal: number; raised: number; timelineSteps: TimelineStep[] }) => {
     setPixKey(data.pixKey);
     setTotalGoal(data.goal);
@@ -346,7 +353,7 @@ export default function App() {
         onAddSupporter={handleAddSupporter}
         onEditSupporter={handleEditSupporter}
         onDeleteSupporter={handleDeleteSupporter}
-        onAuthenticated={setAdminPasscode}
+        onAuthenticated={handleAdminAuthenticated}
         onClose={() => setIsAdminOpen(false)}
       />
 

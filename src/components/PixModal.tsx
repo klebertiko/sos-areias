@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Copy, CheckCircle2, Heart, Hammer, Sparkles, QrCode, ShieldCheck, Phone, Mail, User } from 'lucide-react';
-import { drawPixelQrCode, generatePixPayload } from '../utils/pix';
+import QRCode from 'qrcode';
+import { generatePixPayload } from '../utils/pix';
 import { SkateStance, Supporter } from '../types';
 
 interface PixModalProps {
@@ -43,7 +44,12 @@ export const PixModal: React.FC<PixModalProps> = ({
 
   useEffect(() => {
     if (isOpen && canvasRef.current) {
-      drawPixelQrCode(canvasRef.current, pixPayload);
+      QRCode.toCanvas(canvasRef.current, pixPayload, {
+        width: 180,
+        margin: 1,
+        errorCorrectionLevel: 'M',
+        color: { dark: '#09090b', light: '#ffffff' },
+      }).catch((err) => console.error('Falha ao gerar QR Code PIX:', err));
     }
   }, [isOpen, amount, pixPayload]);
 

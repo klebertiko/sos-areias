@@ -8,8 +8,10 @@ export interface CampaignStateResponse {
   supporters: Supporter[];
 }
 
-export async function fetchState(): Promise<CampaignStateResponse> {
-  const res = await fetch('/api/state');
+export async function fetchState(passcode?: string): Promise<CampaignStateResponse> {
+  const res = await fetch('/api/state', {
+    headers: passcode ? { 'x-admin-passcode': passcode } : undefined,
+  });
   if (!res.ok) throw new Error(`fetchState failed: ${res.status}`);
   return res.json();
 }

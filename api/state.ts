@@ -13,6 +13,7 @@ interface TimelineStepInput {
 
 export default async function handler(req: Request): Promise<Response> {
   if (req.method === 'GET') {
+    const admin = isAdmin(req);
     const [state] = await sql`SELECT pix_key, goal, raised FROM campaign_state WHERE id = 1`;
     const timelineSteps = await sql`
       SELECT phase, title, status, date, description, highlights
@@ -44,8 +45,8 @@ export default async function handler(req: Request): Promise<Response> {
         date: new Date(s.donated_at).toLocaleDateString('pt-BR'),
         message: s.message,
         likes: s.likes,
-        phone: s.phone ?? undefined,
-        email: s.email ?? undefined,
+        phone: admin ? (s.phone ?? undefined) : undefined,
+        email: admin ? (s.email ?? undefined) : undefined,
       })),
     });
   }
