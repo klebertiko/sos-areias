@@ -68,3 +68,10 @@ export interface SponsorBenefit {
   title: string;
   description: string;
 }
+
+export interface TrackPhoto {
+  id: string;
+  src: string;
+  thumb: string;
+  alt: string;
+}

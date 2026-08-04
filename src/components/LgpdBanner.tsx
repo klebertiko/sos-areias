@@ -36,7 +36,7 @@ export const LgpdBanner: React.FC<LgpdBannerProps> = ({ onOpenPrivacy }) => {
               Respeito à LGPD (Lei Geral de Proteção de Dados - Lei 13.709/2018)
             </p>
             <p className="text-zinc-400">
-              Utilizamos cookies estritamente necessários para salvar o estado da sua doação e suas preferências de navegação localmente. Suas informações pessoais (nome/apelido) fornecidas no mural são utilizadas apenas para reconhecimento do seu apoio.
+              Não usamos cookies de rastreamento nem de terceiros. Usamos apenas armazenamento local do seu navegador (localStorage) para salvar o estado da sua doação e suas preferências. Suas informações pessoais (nome/apelido) fornecidas no mural são utilizadas apenas para reconhecimento do seu apoio.
             </p>
           </div>
         </div>

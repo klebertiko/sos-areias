@@ -1,6 +1,7 @@
 import React from 'react';
-import { Users, Handshake, Instagram, ExternalLink, FolderOpen, Award } from 'lucide-react';
-import { PROJECT_PARTNERS, SOCIAL_LINKS, SPONSOR_TIERS, SPONSOR_BENEFITS, PHOTOS_DRIVE_URL } from '../data/mockData';
+import { Users, Handshake, Instagram, Award } from 'lucide-react';
+import { PROJECT_PARTNERS, SOCIAL_LINKS, SPONSOR_TIERS, SPONSOR_BENEFITS, TRACK_PHOTOS } from '../data/mockData';
+import { PhotoGallery } from './PhotoGallery';
 
 const linkPillClass = "flex items-center gap-1.5 bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-xs font-mono text-zinc-300 hover:text-white px-3 py-1.5 rounded-lg transition-colors";
 
@@ -65,19 +66,19 @@ export const AboutProject: React.FC = () => {
         </div>
       </div>
 
-      {/* Social links + photos */}
-      <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-zinc-800">
+      {/* Photo gallery */}
+      <div className="pt-2 border-t border-zinc-800">
+        <PhotoGallery photos={TRACK_PHOTOS} />
+      </div>
+
+      {/* Social links */}
+      <div className="flex flex-wrap items-center gap-2">
         {SOCIAL_LINKS.map((link) => (
           <a key={link.id} href={link.url} target="_blank" rel="noopener noreferrer" className={linkPillClass}>
             <Instagram size={13} className="text-yellow-500" />
             {link.handle}
           </a>
         ))}
-        <a href={PHOTOS_DRIVE_URL} target="_blank" rel="noopener noreferrer" className={`${linkPillClass} ml-auto`}>
-          <FolderOpen size={13} className="text-yellow-500" />
-          Ver fotos da pista
-          <ExternalLink size={11} />
-        </a>
       </div>
 
     </section>

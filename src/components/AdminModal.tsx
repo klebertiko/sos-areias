@@ -3,7 +3,7 @@ import { X, Lock, Key, Calendar, Plus, Trash2, Pencil, Check, CheckCircle2, Save
 import { RewardTier, Supporter, TimelineStep } from '../types';
 import { INITIAL_GOAL } from '../data/mockData';
 
-const ADMIN_PASSCODES = ['2026', 'areias', 'admin'];
+const ADMIN_PASSCODES = ['areias.plaza'];
 
 interface AdminModalProps {
   isOpen: boolean;
@@ -224,7 +224,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
 
             <div className="space-y-2 text-left">
               <label className="text-xs font-mono text-zinc-400 block uppercase">
-                Senha de Acesso (Dica: 2026 ou areias):
+                Senha de Acesso:
               </label>
               <input
                 type="password"
@@ -234,7 +234,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                 className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white font-mono text-sm focus:outline-none focus:border-yellow-500"
               />
               {pinError && (
-                <p className="text-xs text-red-400 font-mono">Senha incorreta. Tente "2026" ou "areias".</p>
+                <p className="text-xs text-red-400 font-mono">Senha incorreta.</p>
               )}
             </div>
 

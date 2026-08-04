@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, Hammer, Sparkles, MapPin, CheckCircle2, Flame } from 'lucide-react';
-import skateparkPixelImg from '../assets/images/areias_skatepark_pixelart_1784690180741.jpg';
+import skateparkPixelImg from '../assets/images/areias_skatepark_pixelart_1784690180741.webp';
 
 interface HeroSectionProps {
   onOpenDonation: (amount?: string) => void;

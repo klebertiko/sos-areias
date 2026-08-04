@@ -1,20 +1,59 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# S.O.S Areias
 
-# Run and deploy your AI Studio app
+Site de arrecadação (vaquinha) para a reforma da pista de skate de Areias, em parceria entre a **Ruaria Skateparks** e a comunidade local do skate (Campeche / Morro das Pedras). O site apresenta o projeto, a meta de arrecadação, o cronograma da obra, as recompensas para doadores e um mural de apoiadores — com pagamento via PIX.
 
-This contains everything you need to run your app locally.
+## Stack
 
-View your app in AI Studio: https://ai.studio/apps/35e18bf0-6610-4461-877d-1aff9f195a62
+- React 19 + TypeScript
+- Vite 6
+- Tailwind CSS 4
+- lucide-react (ícones)
 
-## Run Locally
+Todo o estado (arrecadado, apoiadores, chave PIX, meta, cronograma, recompensas) é gerenciado no client e persistido em `localStorage` — não há backend.
 
-**Prerequisites:**  Node.js
+## Rodando localmente
 
+**Pré-requisitos:** Node.js
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm install
+npm run dev
+```
+
+Abre em `http://localhost:3000`.
+
+## Scripts
+
+```bash
+npm run dev       # servidor de desenvolvimento
+npm run build     # build de produção (dist/)
+npm run preview   # preview do build de produção
+npm run lint       # checagem de tipos (tsc --noEmit)
+npm run clean      # remove dist/ e server.js
+```
+
+## Estrutura
+
+```
+src/
+  components/     # UI: hero, progresso, cronograma, mural de apoiadores, modais (PIX, admin, privacidade)
+  data/mockData.ts  # dados do projeto (orçamento, parceiros, cronograma, recompensas)
+  utils/pix.ts      # geração de payload/QR Code PIX (BR Code)
+  types.ts
+docs/
+  CONTEXT.md                     # briefing e fonte de verdade do conteúdo do projeto
+  APRESENTAÇÃO AREIAS.pdf        # projeto técnico assinado pela Ruaria Skateparks
+```
+
+## Painel do Coletivo (admin)
+
+Acessível pelo rodapé do site ("Painel do Coletivo"), protegido por um código simples (não é autenticação real — é apenas uma trava de UI para uso interno da equipe). Permite:
+
+- Editar a chave PIX, a meta e o total arrecadado
+- Gerenciar o cronograma da obra (etapas, status, datas)
+- Gerenciar as recompensas para doadores (adicionar, remover, marcar como popular)
+- Registrar doações manuais e editar/remover doações existentes
+
+## Conteúdo e fonte de verdade
+
+Todo o conteúdo do site (orçamento, parceiros, cronograma, recompensas) deve refletir fielmente `docs/CONTEXT.md` e o projeto técnico em `docs/APRESENTAÇÃO AREIAS.pdf` — sem números ou informações inventadas.

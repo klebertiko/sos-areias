@@ -1,10 +1,43 @@
-import { BudgetItem, ProjectPartner, RewardTier, SocialLink, SponsorBenefit, SponsorTier, Supporter, TimelineStep } from '../types';
+import { BudgetItem, ProjectPartner, RewardTier, SocialLink, SponsorBenefit, SponsorTier, Supporter, TimelineStep, TrackPhoto } from '../types';
+import vistaGeral1 from '../assets/images/track-photos/vista-geral-1.webp';
+import vistaGeral1Thumb from '../assets/images/track-photos/vista-geral-1-thumb.webp';
+import vistaGeral2 from '../assets/images/track-photos/vista-geral-2.webp';
+import vistaGeral2Thumb from '../assets/images/track-photos/vista-geral-2-thumb.webp';
+import rachadura1 from '../assets/images/track-photos/rachadura-1.webp';
+import rachadura1Thumb from '../assets/images/track-photos/rachadura-1-thumb.webp';
+import rachadura2 from '../assets/images/track-photos/rachadura-2.webp';
+import rachadura2Thumb from '../assets/images/track-photos/rachadura-2-thumb.webp';
+import pocaDagua from '../assets/images/track-photos/poca-dagua.webp';
+import pocaDaguaThumb from '../assets/images/track-photos/poca-dagua-thumb.webp';
+import ferroEnferrujado1 from '../assets/images/track-photos/ferro-enferrujado-1.webp';
+import ferroEnferrujado1Thumb from '../assets/images/track-photos/ferro-enferrujado-1-thumb.webp';
+import ferroEnferrujado2 from '../assets/images/track-photos/ferro-enferrujado-2.webp';
+import ferroEnferrujado2Thumb from '../assets/images/track-photos/ferro-enferrujado-2-thumb.webp';
+import rampaQuebrada from '../assets/images/track-photos/rampa-quebrada.webp';
+import rampaQuebradaThumb from '../assets/images/track-photos/rampa-quebrada-thumb.webp';
+import comunidade from '../assets/images/track-photos/comunidade.webp';
+import comunidadeThumb from '../assets/images/track-photos/comunidade-thumb.webp';
+import tenisArvore from '../assets/images/track-photos/tenis-arvore.webp';
+import tenisArvoreThumb from '../assets/images/track-photos/tenis-arvore-thumb.webp';
 
 export const INITIAL_GOAL = 55370;
 export const INITIAL_RAISED = 0;
 export const DEFAULT_PIX_KEY = "areias.plaza@gmail.com";
 
 export const PHOTOS_DRIVE_URL = 'https://drive.google.com/drive/folders/1mzcppndxVJfB6DP7PLXaLpoHK-2HoLxY?usp=sharing';
+
+export const TRACK_PHOTOS: TrackPhoto[] = [
+  { id: 'vista-geral-1', src: vistaGeral1, thumb: vistaGeral1Thumb, alt: 'Vista geral da pista de Areias do Campeche' },
+  { id: 'vista-geral-2', src: vistaGeral2, thumb: vistaGeral2Thumb, alt: 'Vista geral da pista com a quadra de basquete ao fundo' },
+  { id: 'rachadura-1', src: rachadura1, thumb: rachadura1Thumb, alt: 'Rachadura profunda no concreto de um dos obstáculos' },
+  { id: 'rachadura-2', src: rachadura2, thumb: rachadura2Thumb, alt: 'Rachadura e desnível no piso próximo a um rail' },
+  { id: 'poca-dagua', src: pocaDagua, thumb: pocaDaguaThumb, alt: "Poça d'água acumulada por falha na drenagem do piso" },
+  { id: 'ferro-enferrujado-1', src: ferroEnferrujado1, thumb: ferroEnferrujado1Thumb, alt: 'Ferragem enferrujada na borda de um obstáculo' },
+  { id: 'ferro-enferrujado-2', src: ferroEnferrujado2, thumb: ferroEnferrujado2Thumb, alt: 'Ferragem enferrujada com concreto quebrado na base' },
+  { id: 'rampa-quebrada', src: rampaQuebrada, thumb: rampaQuebradaThumb, alt: 'Rampa de madeira quebrada encostada em outro módulo' },
+  { id: 'comunidade', src: comunidade, thumb: comunidadeThumb, alt: 'Jovem jogando basquete na quadra ao lado da pista' },
+  { id: 'tenis-arvore', src: tenisArvore, thumb: tenisArvoreThumb, alt: 'Tênis pendurados em árvore, marca da cultura local do skate' },
+];
 
 export const PROJECT_PARTNERS: ProjectPartner[] = [
   {
