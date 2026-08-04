@@ -8,6 +8,14 @@ export interface CampaignStateResponse {
   supporters: Supporter[];
 }
 
+export async function verifyAdminPasscode(passcode: string): Promise<boolean> {
+  const res = await fetch('/api/admin-login', {
+    method: 'POST',
+    headers: { 'x-admin-passcode': passcode },
+  });
+  return res.ok;
+}
+
 export async function fetchState(passcode?: string): Promise<CampaignStateResponse> {
   const res = await fetch('/api/state', {
     headers: passcode ? { 'x-admin-passcode': passcode } : undefined,
@@ -28,7 +36,7 @@ export async function saveState(
   if (!res.ok) throw new Error(`saveState failed: ${res.status}`);
 }
 
-export async function addSupporterApi(data: Omit<Supporter, 'id' | 'date' | 'likes'>): Promise<void> {
+export async function addSupporterApi(data: Omit<Supporter, 'date' | 'likes'>): Promise<void> {
   const res = await fetch('/api/supporters', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { X, Lock, Key, Calendar, Plus, Trash2, Pencil, Check, CheckCircle2, Save, ShieldAlert, Users, Phone, Mail } from 'lucide-react';
 import { Supporter, TimelineStep } from '../types';
 import { INITIAL_GOAL } from '../data/mockData';
-
-const ADMIN_PASSCODES = ['areias.plaza'];
+import { verifyAdminPasscode } from '../utils/api';
 
 interface AdminModalProps {
   isOpen: boolean;
@@ -37,6 +36,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [pinInput, setPinInput] = useState('');
   const [pinError, setPinError] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
 
   // Editable states
   const [editablePixKey, setEditablePixKey] = useState(pixKey);
@@ -61,15 +61,23 @@ export const AdminModal: React.FC<AdminModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const passcode = pinInput.trim().toLowerCase();
-    if (ADMIN_PASSCODES.includes(passcode)) {
-      setIsAuthenticated(true);
-      setPinError(false);
-      onAuthenticated(passcode);
-    } else {
+    const passcode = pinInput.trim();
+    setIsVerifying(true);
+    setPinError(false);
+    try {
+      const ok = await verifyAdminPasscode(passcode);
+      if (ok) {
+        setIsAuthenticated(true);
+        onAuthenticated(passcode);
+      } else {
+        setPinError(true);
+      }
+    } catch {
       setPinError(true);
+    } finally {
+      setIsVerifying(false);
     }
   };
 
@@ -192,7 +200,8 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                 placeholder="Digite a senha..."
                 value={pinInput}
                 onChange={(e) => setPinInput(e.target.value)}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white font-mono text-sm focus:outline-none focus:border-red-500"
+                disabled={isVerifying}
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white font-mono text-sm focus:outline-none focus:border-red-500 disabled:opacity-50"
               />
               {pinError && (
                 <p className="text-xs text-red-400 font-mono">Senha incorreta.</p>
@@ -201,9 +210,10 @@ export const AdminModal: React.FC<AdminModalProps> = ({
 
             <button
               type="submit"
-              className="w-full py-3 bg-red-500 hover:bg-red-400 text-white font-black text-sm uppercase rounded-xl transition-all shadow-lg"
+              disabled={isVerifying}
+              className="w-full py-3 bg-red-500 hover:bg-red-400 text-white font-black text-sm uppercase rounded-xl transition-all shadow-lg disabled:opacity-50"
             >
-              Entrar no Painel
+              {isVerifying ? 'Verificando...' : 'Entrar no Painel'}
             </button>
           </form>
         ) : (

@@ -1,8 +1,9 @@
-import { sql, isAdmin, jsonResponse } from './_lib/db';
+import { sql, isAdmin, jsonResponse, adjustRaised } from './_lib/db';
 
 export const config = { runtime: 'edge' };
 
 interface NewSupporterInput {
+  id?: string;
   name: string;
   nickname?: string;
   stance: string;
@@ -21,13 +22,15 @@ export default async function handler(req: Request): Promise<Response> {
       return jsonResponse({ error: 'invalid payload' }, 400);
     }
 
-    const id = crypto.randomUUID();
+    const id = body.id ?? crypto.randomUUID();
 
-    await sql`
-      INSERT INTO supporters (id, name, nickname, stance, amount, message, likes, phone, email)
-      VALUES (${id}, ${name}, ${nickname ?? null}, ${stance}, ${amount}, ${message}, 1, ${phone ?? null}, ${email ?? null})
-    `;
-    await sql`UPDATE campaign_state SET raised = raised + ${amount}, updated_at = now() WHERE id = 1`;
+    await sql.transaction([
+      sql`
+        INSERT INTO supporters (id, name, nickname, stance, amount, message, likes, phone, email)
+        VALUES (${id}, ${name}, ${nickname ?? null}, ${stance}, ${amount}, ${message}, 1, ${phone ?? null}, ${email ?? null})
+      `,
+      adjustRaised(amount),
+    ]);
 
     return jsonResponse({ id }, 201);
   }
@@ -49,8 +52,10 @@ export default async function handler(req: Request): Promise<Response> {
     if (!current) return jsonResponse({ error: 'not found' }, 404);
 
     const delta = amount - Number(current.amount);
-    await sql`UPDATE supporters SET amount = ${amount} WHERE id = ${id}`;
-    await sql`UPDATE campaign_state SET raised = raised + ${delta}, updated_at = now() WHERE id = 1`;
+    await sql.transaction([
+      sql`UPDATE supporters SET amount = ${amount} WHERE id = ${id}`,
+      adjustRaised(delta),
+    ]);
 
     return jsonResponse({ ok: true });
   }
@@ -63,9 +68,10 @@ export default async function handler(req: Request): Promise<Response> {
     if (!id) return jsonResponse({ error: 'missing id' }, 400);
 
     const [sup] = await sql`SELECT amount FROM supporters WHERE id = ${id}`;
-    await sql`DELETE FROM supporters WHERE id = ${id}`;
     if (sup) {
-      await sql`UPDATE campaign_state SET raised = raised - ${sup.amount}, updated_at = now() WHERE id = 1`;
+      await sql.transaction([sql`DELETE FROM supporters WHERE id = ${id}`, adjustRaised(-sup.amount)]);
+    } else {
+      await sql`DELETE FROM supporters WHERE id = ${id}`;
     }
 
     return jsonResponse({ ok: true });

@@ -131,7 +131,7 @@ export default function App() {
 
     setSupporters((prev) => [created, ...prev]);
     setRaised((prev) => prev + newSupporter.amount);
-    addSupporterApi(newSupporter).catch((err) => console.error('Falha ao salvar apoiador:', err));
+    addSupporterApi({ ...newSupporter, id: created.id }).catch((err) => console.error('Falha ao salvar apoiador:', err));
   }, []);
 
   const handleLikeSupporter = useCallback((id: string) => {

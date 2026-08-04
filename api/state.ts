@@ -1,41 +1,28 @@
 import { sql, isAdmin, jsonResponse } from './_lib/db';
+import { TimelineStep } from '../src/types';
 
 export const config = { runtime: 'edge' };
-
-interface TimelineStepInput {
-  phase: number;
-  title: string;
-  status: string;
-  date: string;
-  description: string;
-  highlights: string[];
-}
 
 export default async function handler(req: Request): Promise<Response> {
   if (req.method === 'GET') {
     const admin = isAdmin(req);
-    const [state] = await sql`SELECT pix_key, goal, raised FROM campaign_state WHERE id = 1`;
-    const timelineSteps = await sql`
-      SELECT phase, title, status, date, description, highlights
-      FROM timeline_steps ORDER BY phase ASC
-    `;
-    const supportersRows = await sql`
-      SELECT id, name, nickname, stance, amount, donated_at, message, likes, phone, email
-      FROM supporters ORDER BY donated_at DESC
-    `;
+    const [[state], timelineSteps, supportersRows] = await Promise.all([
+      sql`SELECT pix_key, goal, raised FROM campaign_state WHERE id = 1`,
+      sql`
+        SELECT phase, title, status, date, description, highlights
+        FROM timeline_steps ORDER BY phase ASC
+      `,
+      sql`
+        SELECT id, name, nickname, stance, amount, donated_at, message, likes, phone, email
+        FROM supporters ORDER BY donated_at DESC
+      `,
+    ]);
 
     return jsonResponse({
       pixKey: state?.pix_key ?? null,
       goal: state ? Number(state.goal) : null,
       raised: state ? Number(state.raised) : null,
-      timelineSteps: timelineSteps.map((t) => ({
-        phase: t.phase,
-        title: t.title,
-        status: t.status,
-        date: t.date,
-        description: t.description,
-        highlights: t.highlights,
-      })),
+      timelineSteps,
       supporters: supportersRows.map((s) => ({
         id: s.id,
         name: s.name,
@@ -59,22 +46,23 @@ export default async function handler(req: Request): Promise<Response> {
       pixKey: string;
       goal: number;
       raised: number;
-      timelineSteps: TimelineStepInput[];
+      timelineSteps: TimelineStep[];
     };
 
-    await sql`
-      UPDATE campaign_state
-      SET pix_key = ${pixKey}, goal = ${goal}, raised = ${raised}, updated_at = now()
-      WHERE id = 1
-    `;
-
-    await sql`DELETE FROM timeline_steps`;
-    for (const step of timelineSteps) {
-      await sql`
-        INSERT INTO timeline_steps (phase, title, status, date, description, highlights)
-        VALUES (${step.phase}, ${step.title}, ${step.status}, ${step.date}, ${step.description}, ${JSON.stringify(step.highlights)}::jsonb)
-      `;
-    }
+    await sql.transaction([
+      sql`
+        UPDATE campaign_state
+        SET pix_key = ${pixKey}, goal = ${goal}, raised = ${raised}, updated_at = now()
+        WHERE id = 1
+      `,
+      sql`DELETE FROM timeline_steps`,
+      ...timelineSteps.map(
+        (step) => sql`
+          INSERT INTO timeline_steps (phase, title, status, date, description, highlights)
+          VALUES (${step.phase}, ${step.title}, ${step.status}, ${step.date}, ${step.description}, ${JSON.stringify(step.highlights)}::jsonb)
+        `
+      ),
+    ]);
 
     return jsonResponse({ ok: true });
   }
