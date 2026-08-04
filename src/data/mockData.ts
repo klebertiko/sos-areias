@@ -107,37 +107,7 @@ export const SPONSOR_BENEFITS: SponsorBenefit[] = [
   }
 ];
 
-export const INITIAL_REWARDS: RewardTier[] = [
-  {
-    id: 'adesivo',
-    title: 'Adesivo Exclusivo S.O.S Areias',
-    amount: 20,
-    description: 'Adesivo em vinil laminado de alta resistência para colar no shape ou no capacete.',
-    items: ['1x Adesivo de Vinil "Eu Apoiei o Skate Areias"', 'Agradecimento no site oficial']
-  },
-  {
-    id: 'stories',
-    title: 'Pack Adesivos + Salve no Instagram',
-    amount: 50,
-    description: 'Combo de 3 adesivos artesanais e um agradecimento especial nas redes oficiais do coletivo.',
-    items: ['Pack com 3 Adesivos Exclusivos', 'Agradecimento marcado no Instagram', 'Nome na lista do site']
-  },
-  {
-    id: 'mural',
-    title: 'Nome Gravado no Mural da Pista',
-    amount: 100,
-    popular: true,
-    description: 'Seu nome ou apelido pintado com graffiti no mural de apoiadores da nova pista de Areias.',
-    items: ['Nome definitivo no Mural da Pista', 'Pack com 5 Adesivos Exclusivos', 'Certificado Digital de Apoiador']
-  },
-  {
-    id: 'camiseta',
-    title: 'Camiseta Oficial + Nome no Mural',
-    amount: 250,
-    description: 'Camiseta Silk Screen 100% algodão edição limitada "Reforma Pista de Areias 2026".',
-    items: ['Camiseta Silk Screen Algodão 100%', 'Nome no Mural dos Apoiadores', 'Pack Completo de Adesivos']
-  }
-];
+export const INITIAL_REWARDS: RewardTier[] = [];
 
 export const BUDGET_ITEMS: BudgetItem[] = [
   {

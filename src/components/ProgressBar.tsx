@@ -82,6 +82,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       </div>
 
       {/* Quick Reward Selector */}
+      {rewards.length > 0 && (
       <div className="pt-2 border-t border-zinc-800">
         <h4 className="font-bold text-sm text-zinc-200 uppercase tracking-wider mb-3 flex items-center gap-1.5">
           <Trophy size={16} className="text-yellow-500" />
@@ -126,6 +127,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
           ))}
         </div>
       </div>
+      )}
 
       {/* Trust Notice */}
       <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl text-center">
