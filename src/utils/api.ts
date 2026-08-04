@@ -1,10 +1,11 @@
-import { Supporter, TimelineStep } from '../types';
+import { Raffle, Supporter, TimelineStep } from '../types';
 
 export interface CampaignStateResponse {
   pixKey: string | null;
   goal: number | null;
   raised: number | null;
   timelineSteps: TimelineStep[];
+  raffles: Raffle[];
   supporters: Supporter[];
 }
 
@@ -70,4 +71,32 @@ export async function deleteSupporterApi(passcode: string, id: string): Promise<
     body: JSON.stringify({ id }),
   });
   if (!res.ok) throw new Error(`deleteSupporter failed: ${res.status}`);
+}
+
+export async function addRaffleApi(passcode: string, data: Omit<Raffle, 'id'> & { id?: string }): Promise<{ id: string }> {
+  const res = await fetch('/api/raffles', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'x-admin-passcode': passcode },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error(`addRaffle failed: ${res.status}`);
+  return res.json();
+}
+
+export async function editRaffleApi(passcode: string, id: string, updates: Partial<Omit<Raffle, 'id'>>): Promise<void> {
+  const res = await fetch('/api/raffles', {
+    method: 'PATCH',
+    headers: { 'content-type': 'application/json', 'x-admin-passcode': passcode },
+    body: JSON.stringify({ id, ...updates }),
+  });
+  if (!res.ok) throw new Error(`editRaffle failed: ${res.status}`);
+}
+
+export async function deleteRaffleApi(passcode: string, id: string): Promise<void> {
+  const res = await fetch('/api/raffles', {
+    method: 'DELETE',
+    headers: { 'content-type': 'application/json', 'x-admin-passcode': passcode },
+    body: JSON.stringify({ id }),
+  });
+  if (!res.ok) throw new Error(`deleteRaffle failed: ${res.status}`);
 }

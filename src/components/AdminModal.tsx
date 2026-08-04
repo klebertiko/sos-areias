@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, Lock, Key, Calendar, Plus, Trash2, Pencil, Check, CheckCircle2, Save, ShieldAlert, Users, Phone, Mail } from 'lucide-react';
-import { Supporter, TimelineStep } from '../types';
+import { X, Lock, Key, Calendar, Plus, Trash2, Pencil, Check, CheckCircle2, Save, ShieldAlert, Users, Phone, Mail, Ticket, ArrowUp, ArrowDown } from 'lucide-react';
+import { Raffle, Supporter, TimelineStep } from '../types';
 import { INITIAL_GOAL } from '../data/mockData';
 import { verifyAdminPasscode } from '../utils/api';
 
@@ -15,6 +15,10 @@ interface AdminModalProps {
   onAddSupporter: (data: Omit<Supporter, 'id' | 'date' | 'likes'>) => void;
   onEditSupporter: (id: string, updates: Partial<Pick<Supporter, 'name' | 'amount'>>) => void;
   onDeleteSupporter: (id: string) => void;
+  raffles: Raffle[];
+  onAddRaffle: (data: Omit<Raffle, 'id'>) => void;
+  onEditRaffle: (id: string, updates: Omit<Raffle, 'id'>) => void;
+  onDeleteRaffle: (id: string) => void;
   onAuthenticated: (passcode: string) => void;
   onClose: () => void;
 }
@@ -30,6 +34,10 @@ export const AdminModal: React.FC<AdminModalProps> = ({
   onAddSupporter,
   onEditSupporter,
   onDeleteSupporter,
+  raffles,
+  onAddRaffle,
+  onEditRaffle,
+  onDeleteRaffle,
   onAuthenticated,
   onClose,
 }) => {
@@ -58,6 +66,19 @@ export const AdminModal: React.FC<AdminModalProps> = ({
   // Inline donation-amount edit state
   const [editingSupporterId, setEditingSupporterId] = useState<string | null>(null);
   const [editingAmount, setEditingAmount] = useState('');
+
+  // New raffle form state
+  const [newRaffleTitle, setNewRaffleTitle] = useState('');
+  const [newRaffleDescription, setNewRaffleDescription] = useState('');
+  const [newRaffleUrl, setNewRaffleUrl] = useState('');
+  const [newRaffleStatus, setNewRaffleStatus] = useState<Raffle['status']>('ativa');
+
+  // Inline raffle edit state
+  const [editingRaffleId, setEditingRaffleId] = useState<string | null>(null);
+  const [editingRaffleTitle, setEditingRaffleTitle] = useState('');
+  const [editingRaffleDescription, setEditingRaffleDescription] = useState('');
+  const [editingRaffleUrl, setEditingRaffleUrl] = useState('');
+  const [editingRaffleStatus, setEditingRaffleStatus] = useState<Raffle['status']>('ativa');
 
   if (!isOpen) return null;
 
@@ -104,6 +125,18 @@ export const AdminModal: React.FC<AdminModalProps> = ({
 
   const handleDeleteStep = (phase: number) => {
     setSteps((prev) => prev.filter((s) => s.phase !== phase));
+  };
+
+  const handleMoveStep = (phase: number, direction: -1 | 1) => {
+    setSteps((prev) => {
+      const sorted = [...prev].sort((a, b) => a.phase - b.phase);
+      const index = sorted.findIndex((s) => s.phase === phase);
+      const targetIndex = index + direction;
+      if (index === -1 || targetIndex < 0 || targetIndex >= sorted.length) return prev;
+
+      [sorted[index], sorted[targetIndex]] = [sorted[targetIndex], sorted[index]];
+      return sorted.map((s, i) => ({ ...s, phase: i + 1 }));
+    });
   };
 
   const handleAddStep = (e: React.FormEvent) => {
@@ -156,6 +189,43 @@ export const AdminModal: React.FC<AdminModalProps> = ({
     setEditingSupporterId(null);
   };
 
+  const handleAddRaffle = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newRaffleTitle.trim() || !newRaffleDescription.trim() || !newRaffleUrl.trim()) return;
+
+    onAddRaffle({
+      title: newRaffleTitle.trim(),
+      description: newRaffleDescription.trim(),
+      url: newRaffleUrl.trim(),
+      status: newRaffleStatus,
+    });
+
+    setNewRaffleTitle('');
+    setNewRaffleDescription('');
+    setNewRaffleUrl('');
+    setNewRaffleStatus('ativa');
+  };
+
+  const handleStartEditRaffle = (raffle: Raffle) => {
+    setEditingRaffleId(raffle.id);
+    setEditingRaffleTitle(raffle.title);
+    setEditingRaffleDescription(raffle.description);
+    setEditingRaffleUrl(raffle.url);
+    setEditingRaffleStatus(raffle.status);
+  };
+
+  const handleConfirmEditRaffle = (id: string) => {
+    if (!editingRaffleTitle.trim() || !editingRaffleDescription.trim() || !editingRaffleUrl.trim()) return;
+
+    onEditRaffle(id, {
+      title: editingRaffleTitle.trim(),
+      description: editingRaffleDescription.trim(),
+      url: editingRaffleUrl.trim(),
+      status: editingRaffleStatus,
+    });
+    setEditingRaffleId(null);
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
       <div className="bg-zinc-900 border border-zinc-700 rounded-3xl w-full max-w-2xl p-6 sm:p-8 space-y-6 shadow-2xl my-8 animate-[slideUp_0.2s_ease-out]">
@@ -168,7 +238,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
             </div>
             <div>
               <h3 className="font-bold text-white text-xl">Painel de Gestão do Coletivo</h3>
-              <p className="text-xs text-zinc-400 font-mono">Gerenciamento de PIX, Progresso, Cronograma e Doações</p>
+              <p className="text-xs text-zinc-400 font-mono">Gerenciamento de PIX, Progresso, Cronograma, Rifas e Doações</p>
             </div>
           </div>
 
@@ -296,7 +366,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                       <p className="text-zinc-400 text-[11px] font-mono">{step.date} • {step.description}</p>
                     </div>
 
-                    <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                    <div className="flex items-center gap-2 w-full sm:w-auto justify-end shrink-0">
                       <select
                         value={step.status}
                         onChange={(e) => handleStatusChange(step.phase, e.target.value as TimelineStep['status'])}
@@ -306,6 +376,24 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                         <option value="em_andamento">Em Andamento</option>
                         <option value="proximo">Próximo</option>
                       </select>
+
+                      <button
+                        onClick={() => handleMoveStep(step.phase, -1)}
+                        disabled={step.phase === 1}
+                        className="p-1.5 text-zinc-500 hover:text-red-400 hover:bg-zinc-950 rounded-lg transition-colors disabled:opacity-30 disabled:hover:text-zinc-500"
+                        title="Mover para cima"
+                      >
+                        <ArrowUp size={16} />
+                      </button>
+
+                      <button
+                        onClick={() => handleMoveStep(step.phase, 1)}
+                        disabled={step.phase === steps.length}
+                        className="p-1.5 text-zinc-500 hover:text-red-400 hover:bg-zinc-950 rounded-lg transition-colors disabled:opacity-30 disabled:hover:text-zinc-500"
+                        title="Mover para baixo"
+                      >
+                        <ArrowDown size={16} />
+                      </button>
 
                       <button
                         onClick={() => handleDeleteStep(step.phase)}
@@ -358,6 +446,167 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                 >
                   Adicionar Etapa
                 </button>
+              </form>
+            </div>
+
+            {/* Raffles Management */}
+            <div className="bg-zinc-950 p-4 sm:p-5 rounded-2xl border border-zinc-800 space-y-4">
+              <h4 className="font-bold text-white text-base flex items-center gap-2">
+                <Ticket className="text-red-400" size={18} />
+                Gerenciar Rifas
+              </h4>
+
+              {/* Current raffles list */}
+              <div className="space-y-2">
+                {raffles.length === 0 ? (
+                  <p className="text-xs text-zinc-500 font-mono italic py-2">Nenhuma rifa cadastrada ainda.</p>
+                ) : (
+                  raffles.map((raffle) => (
+                    <div
+                      key={raffle.id}
+                      className="bg-zinc-900 border border-zinc-800 p-3 rounded-xl space-y-2 text-xs"
+                    >
+                      {editingRaffleId === raffle.id ? (
+                        <div className="space-y-2">
+                          <input
+                            type="text"
+                            value={editingRaffleTitle}
+                            onChange={(e) => setEditingRaffleTitle(e.target.value)}
+                            className="w-full bg-zinc-950 border border-red-500/50 rounded-lg px-2 py-1.5 text-white font-bold text-sm"
+                          />
+                          <textarea
+                            value={editingRaffleDescription}
+                            onChange={(e) => setEditingRaffleDescription(e.target.value)}
+                            rows={2}
+                            className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-2 py-1.5 text-zinc-300 resize-none"
+                          />
+                          <input
+                            type="url"
+                            value={editingRaffleUrl}
+                            onChange={(e) => setEditingRaffleUrl(e.target.value)}
+                            className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-2 py-1.5 text-zinc-300 font-mono"
+                          />
+                          <div className="flex items-center justify-between gap-2">
+                            <select
+                              value={editingRaffleStatus}
+                              onChange={(e) => setEditingRaffleStatus(e.target.value as Raffle['status'])}
+                              className="bg-zinc-950 border border-zinc-800 rounded-lg px-2 py-1.5 text-zinc-200 font-mono"
+                            >
+                              <option value="ativa">Ativa</option>
+                              <option value="encerrada">Encerrada</option>
+                            </select>
+
+                            <div className="flex items-center gap-1">
+                              <button
+                                type="button"
+                                onClick={() => handleConfirmEditRaffle(raffle.id)}
+                                className="p-1.5 text-green-400 hover:bg-zinc-950 rounded-lg transition-colors"
+                                title="Salvar rifa"
+                              >
+                                <Check size={16} />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setEditingRaffleId(null)}
+                                className="p-1.5 text-zinc-500 hover:text-red-400 hover:bg-zinc-950 rounded-lg transition-colors"
+                                title="Cancelar edição"
+                              >
+                                <X size={16} />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                          <div className="space-y-0.5 max-w-sm min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="font-bold text-white text-sm">{raffle.title}</span>
+                              <span
+                                className={`text-[10px] font-mono uppercase font-bold px-2 py-0.5 rounded border ${
+                                  raffle.status === 'ativa'
+                                    ? 'bg-green-500/10 text-green-400 border-green-500/30'
+                                    : 'bg-zinc-800 text-zinc-400 border-zinc-700'
+                                }`}
+                              >
+                                {raffle.status === 'ativa' ? 'Ativa' : 'Encerrada'}
+                              </span>
+                            </div>
+                            <p className="text-zinc-400 text-[11px] font-mono truncate">{raffle.url}</p>
+                          </div>
+
+                          <div className="flex items-center gap-1 self-end sm:self-center shrink-0">
+                            <button
+                              onClick={() => handleStartEditRaffle(raffle)}
+                              className="p-1.5 text-zinc-500 hover:text-red-400 hover:bg-zinc-950 rounded-lg transition-colors"
+                              title="Editar rifa"
+                            >
+                              <Pencil size={16} />
+                            </button>
+                            <button
+                              onClick={() => onDeleteRaffle(raffle.id)}
+                              className="p-1.5 text-zinc-500 hover:text-red-400 hover:bg-zinc-950 rounded-lg transition-colors"
+                              title="Excluir rifa"
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))
+                )}
+              </div>
+
+              {/* Add New Raffle Form */}
+              <form onSubmit={handleAddRaffle} className="pt-3 border-t border-zinc-800/80 space-y-2">
+                <p className="text-xs font-mono font-bold text-red-400 uppercase flex items-center gap-1">
+                  <Plus size={14} />
+                  Adicionar Nova Rifa:
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    placeholder="Título da rifa"
+                    value={newRaffleTitle}
+                    onChange={(e) => setNewRaffleTitle(e.target.value)}
+                    className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-white"
+                  />
+                  <input
+                    type="url"
+                    placeholder="Link da rifa (URL)"
+                    value={newRaffleUrl}
+                    onChange={(e) => setNewRaffleUrl(e.target.value)}
+                    className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-white font-mono"
+                  />
+                </div>
+
+                <input
+                  type="text"
+                  placeholder="Descrição da rifa"
+                  value={newRaffleDescription}
+                  onChange={(e) => setNewRaffleDescription(e.target.value)}
+                  className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-white"
+                />
+
+                <div className="flex items-center gap-2">
+                  <select
+                    value={newRaffleStatus}
+                    onChange={(e) => setNewRaffleStatus(e.target.value as Raffle['status'])}
+                    className="bg-zinc-900 border border-zinc-800 rounded-lg px-2 py-1.5 text-xs text-zinc-200 font-mono"
+                  >
+                    <option value="ativa">Ativa</option>
+                    <option value="encerrada">Encerrada</option>
+                  </select>
+
+                  <button
+                    type="submit"
+                    disabled={!newRaffleTitle.trim() || !newRaffleDescription.trim() || !newRaffleUrl.trim()}
+                    className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs rounded-lg transition-colors disabled:opacity-50"
+                  >
+                    Adicionar Rifa
+                  </button>
+                </div>
               </form>
             </div>
 

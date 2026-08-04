@@ -22,7 +22,7 @@ import {
   RAFFLES,
   TIMELINE_STEPS,
 } from './data/mockData';
-import { Supporter, TimelineStep } from './types';
+import { Raffle, Supporter, TimelineStep } from './types';
 import { soundEngine } from './utils/audio';
 import {
   fetchState,
@@ -31,6 +31,9 @@ import {
   likeSupporterApi,
   editSupporterAmountApi,
   deleteSupporterApi,
+  addRaffleApi,
+  editRaffleApi,
+  deleteRaffleApi,
 } from './utils/api';
 
 export default function App() {
@@ -67,6 +70,15 @@ export default function App() {
     }
   });
 
+  const [raffles, setRaffles] = useState<Raffle[]>(() => {
+    const saved = localStorage.getItem('areias_raffles_v3');
+    try {
+      return saved ? JSON.parse(saved) : RAFFLES;
+    } catch {
+      return RAFFLES;
+    }
+  });
+
   const [isPixOpen, setIsPixOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
@@ -96,6 +108,10 @@ export default function App() {
     localStorage.setItem('areias_timeline_v3', JSON.stringify(timelineSteps));
   }, [timelineSteps]);
 
+  useEffect(() => {
+    localStorage.setItem('areias_raffles_v3', JSON.stringify(raffles));
+  }, [raffles]);
+
   // Hydrate from Neon (source of truth) once on mount; localStorage above stays as instant-paint fallback.
   useEffect(() => {
     fetchState()
@@ -104,6 +120,7 @@ export default function App() {
         if (state.goal !== null) setTotalGoal(state.goal);
         if (state.raised !== null) setRaised(state.raised);
         if (state.timelineSteps.length > 0) setTimelineSteps(state.timelineSteps);
+        if (state.raffles.length > 0) setRaffles(state.raffles);
         setSupporters(state.supporters);
       })
       .catch((err) => console.warn('Falha ao carregar dados do servidor, usando cache local:', err));
@@ -178,6 +195,25 @@ export default function App() {
     setSupporters((prev) => prev.map((s) => (s.id === id ? { ...s, ...updates } : s)));
   }, [supporters, adminPasscode]);
 
+  const handleAddRaffle = useCallback((data: Omit<Raffle, 'id'>) => {
+    if (!adminPasscode) return;
+    addRaffleApi(adminPasscode, data)
+      .then(({ id }) => setRaffles((prev) => [{ ...data, id }, ...prev]))
+      .catch((err) => console.error('Falha ao criar rifa:', err));
+  }, [adminPasscode]);
+
+  const handleEditRaffle = useCallback((id: string, updates: Omit<Raffle, 'id'>) => {
+    if (!adminPasscode) return;
+    setRaffles((prev) => prev.map((r) => (r.id === id ? { ...r, ...updates } : r)));
+    editRaffleApi(adminPasscode, id, updates).catch((err) => console.error('Falha ao editar rifa:', err));
+  }, [adminPasscode]);
+
+  const handleDeleteRaffle = useCallback((id: string) => {
+    if (!adminPasscode) return;
+    setRaffles((prev) => prev.filter((r) => r.id !== id));
+    deleteRaffleApi(adminPasscode, id).catch((err) => console.error('Falha ao excluir rifa:', err));
+  }, [adminPasscode]);
+
   const handleAdminAuthenticated = useCallback((passcode: string) => {
     setAdminPasscode(passcode);
     fetchState(passcode)
@@ -230,6 +266,7 @@ export default function App() {
           {/* Wall of Supporters & Community Messages */}
           <SupportersWall
             supporters={supporters}
+            budgetItems={BUDGET_ITEMS}
             onAddSupporter={handleAddSupporter}
             onLikeSupporter={handleLikeSupporter}
             onOpenDonation={() => handleOpenDonation()}
@@ -249,7 +286,7 @@ export default function App() {
               setIsShareOpen(true);
             }}
           />
-          <RaffleSection raffles={RAFFLES} />
+          <RaffleSection raffles={raffles} />
         </div>
 
       </main>
@@ -356,6 +393,10 @@ export default function App() {
         onAddSupporter={handleAddSupporter}
         onEditSupporter={handleEditSupporter}
         onDeleteSupporter={handleDeleteSupporter}
+        raffles={raffles}
+        onAddRaffle={handleAddRaffle}
+        onEditRaffle={handleEditRaffle}
+        onDeleteRaffle={handleDeleteRaffle}
         onAuthenticated={handleAdminAuthenticated}
         onClose={() => setIsAdminOpen(false)}
       />

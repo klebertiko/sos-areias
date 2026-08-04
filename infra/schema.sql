@@ -34,6 +34,17 @@ CREATE TABLE IF NOT EXISTS supporters (
 
 CREATE INDEX IF NOT EXISTS supporters_donated_at_idx ON supporters (donated_at DESC);
 
+CREATE TABLE IF NOT EXISTS raffles (
+  id TEXT PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  url TEXT NOT NULL,
+  status TEXT NOT NULL CHECK (status IN ('ativa', 'encerrada')),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS raffles_created_at_idx ON raffles (created_at DESC);
+
 -- Seed: campaign_state (matches src/data/mockData.ts INITIAL_GOAL / INITIAL_RAISED / DEFAULT_PIX_KEY)
 INSERT INTO campaign_state (id, pix_key, goal, raised)
 VALUES (1, 'areias.plaza@gmail.com', 55370, 5206.70)
@@ -59,3 +70,8 @@ INSERT INTO timeline_steps (phase, title, status, date, description, highlights)
 ON CONFLICT (phase) DO NOTHING;
 
 -- supporters: no seed rows (INITIAL_SUPPORTERS is empty — table just needs to exist).
+
+-- Seed: raffles (matches src/data/mockData.ts RAFFLES)
+INSERT INTO raffles (id, title, description, url, status) VALUES
+('reforma-areias-1', 'Rifa Reforma Areias Skate Plaza', 'Concorra a prêmios e ajude a arrecadar para a reforma da pista.', 'https://rifapersonalizada.com.br/reforma-areias-skate-plaza-uCWWyw', 'ativa')
+ON CONFLICT (id) DO NOTHING;

@@ -6,7 +6,7 @@ export const config = { runtime: 'edge' };
 export default async function handler(req: Request): Promise<Response> {
   if (req.method === 'GET') {
     const admin = isAdmin(req);
-    const [[state], timelineSteps, supportersRows] = await Promise.all([
+    const [[state], timelineSteps, supportersRows, raffles] = await Promise.all([
       sql`SELECT pix_key, goal, raised FROM campaign_state WHERE id = 1`,
       sql`
         SELECT phase, title, status, date, description, highlights
@@ -16,6 +16,10 @@ export default async function handler(req: Request): Promise<Response> {
         SELECT id, name, nickname, stance, amount, donated_at, message, likes, phone, email
         FROM supporters ORDER BY donated_at DESC
       `,
+      sql`
+        SELECT id, title, description, url, status
+        FROM raffles ORDER BY created_at DESC
+      `,
     ]);
 
     return jsonResponse({
@@ -23,6 +27,7 @@ export default async function handler(req: Request): Promise<Response> {
       goal: state ? Number(state.goal) : null,
       raised: state ? Number(state.raised) : null,
       timelineSteps,
+      raffles,
       supporters: supportersRows.map((s) => ({
         id: s.id,
         name: s.name,

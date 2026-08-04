@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { MessageSquare, ThumbsUp, Send, Heart, User, Sparkles } from 'lucide-react';
-import { SkateStance, Supporter } from '../types';
+import { BudgetItem, SkateStance, Supporter } from '../types';
+import { allocateDonationsToBudget } from '../utils/budgetAllocation';
 
 interface SupportersWallProps {
   supporters: Supporter[];
+  budgetItems: BudgetItem[];
   onAddSupporter: (supporter: Omit<Supporter, 'id' | 'date' | 'likes'>) => void;
   onLikeSupporter: (id: string) => void;
   onOpenDonation: () => void;
@@ -11,10 +13,15 @@ interface SupportersWallProps {
 
 export const SupportersWall: React.FC<SupportersWallProps> = ({
   supporters,
+  budgetItems,
   onAddSupporter,
   onLikeSupporter,
   onOpenDonation,
 }) => {
+  const allocations = useMemo(
+    () => allocateDonationsToBudget(supporters, budgetItems),
+    [supporters, budgetItems]
+  );
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
   const [stance, setStance] = useState<SkateStance>('Regular');
@@ -161,7 +168,10 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
             </button>
           </div>
         ) : (
-          supporters.map((sup) => (
+          supporters.map((sup) => {
+            const allocatedCategories = allocations.get(sup.id) ?? [];
+
+            return (
             <div
               key={sup.id}
               className="bg-zinc-950 border border-zinc-800/80 p-4 rounded-xl space-y-2 hover:border-zinc-700 transition-colors"
@@ -199,6 +209,12 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
                 "{sup.message}"
               </p>
 
+              {allocatedCategories.length > 0 && (
+                <p className="text-[11px] font-mono text-zinc-500 pl-10">
+                  Direcionado para: <span className="text-zinc-300">{allocatedCategories.join(' + ')}</span>
+                </p>
+              )}
+
               <div className="pl-10 pt-1 flex justify-end">
                 <button
                   onClick={() => onLikeSupporter(sup.id)}
@@ -209,7 +225,8 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
                 </button>
               </div>
             </div>
-          ))
+            );
+          })
         )}
       </div>
 
