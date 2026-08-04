@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, Lock, Key, Calendar, Plus, Trash2, Pencil, Check, CheckCircle2, Save, ShieldAlert, Users, Phone, Mail, Ticket, ArrowUp, ArrowDown } from 'lucide-react';
 import { Raffle, Supporter, TimelineStep } from '../types';
 import { INITIAL_GOAL } from '../data/mockData';
@@ -80,6 +80,14 @@ export const AdminModal: React.FC<AdminModalProps> = ({
   const [editingRaffleUrl, setEditingRaffleUrl] = useState('');
   const [editingRaffleStatus, setEditingRaffleStatus] = useState<Raffle['status']>('ativa');
 
+  useEffect(() => {
+    if (!isOpen) return;
+    setEditablePixKey(pixKey);
+    setEditableGoal(totalGoal.toString());
+    setEditableRaised(raised.toString());
+    setSteps(timelineSteps);
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -124,7 +132,12 @@ export const AdminModal: React.FC<AdminModalProps> = ({
   };
 
   const handleDeleteStep = (phase: number) => {
-    setSteps((prev) => prev.filter((s) => s.phase !== phase));
+    setSteps((prev) =>
+      prev
+        .filter((s) => s.phase !== phase)
+        .sort((a, b) => a.phase - b.phase)
+        .map((s, i) => ({ ...s, phase: i + 1 }))
+    );
   };
 
   const handleMoveStep = (phase: number, direction: -1 | 1) => {
