@@ -19,12 +19,20 @@ import comunidade from '../assets/images/track-photos/comunidade.webp';
 import comunidadeThumb from '../assets/images/track-photos/comunidade-thumb.webp';
 import tenisArvore from '../assets/images/track-photos/tenis-arvore.webp';
 import tenisArvoreThumb from '../assets/images/track-photos/tenis-arvore-thumb.webp';
+import rachadura3 from '../assets/images/track-photos/rachadura-3.webp';
+import rachadura3Thumb from '../assets/images/track-photos/rachadura-3-thumb.webp';
+import quadraBasquete from '../assets/images/track-photos/quadra-basquete.webp';
+import quadraBasqueteThumb from '../assets/images/track-photos/quadra-basquete-thumb.webp';
+import mesaJogos from '../assets/images/track-photos/mesa-jogos.webp';
+import mesaJogosThumb from '../assets/images/track-photos/mesa-jogos-thumb.webp';
+import grafiteMuro from '../assets/images/track-photos/grafite-muro.webp';
+import grafiteMuroThumb from '../assets/images/track-photos/grafite-muro-thumb.webp';
+import muralArte from '../assets/images/track-photos/mural-arte.webp';
+import muralArteThumb from '../assets/images/track-photos/mural-arte-thumb.webp';
 
 export const INITIAL_GOAL = 55370;
 export const INITIAL_RAISED = 0;
 export const DEFAULT_PIX_KEY = "areias.plaza@gmail.com";
-
-export const PHOTOS_DRIVE_URL = 'https://drive.google.com/drive/folders/1mzcppndxVJfB6DP7PLXaLpoHK-2HoLxY?usp=sharing';
 
 export const TRACK_PHOTOS: TrackPhoto[] = [
   { id: 'vista-geral-1', src: vistaGeral1, thumb: vistaGeral1Thumb, alt: 'Vista geral da pista de Areias do Campeche' },
@@ -37,6 +45,11 @@ export const TRACK_PHOTOS: TrackPhoto[] = [
   { id: 'rampa-quebrada', src: rampaQuebrada, thumb: rampaQuebradaThumb, alt: 'Rampa de madeira quebrada encostada em outro módulo' },
   { id: 'comunidade', src: comunidade, thumb: comunidadeThumb, alt: 'Jovem jogando basquete na quadra ao lado da pista' },
   { id: 'tenis-arvore', src: tenisArvore, thumb: tenisArvoreThumb, alt: 'Tênis pendurados em árvore, marca da cultura local do skate' },
+  { id: 'rachadura-3', src: rachadura3, thumb: rachadura3Thumb, alt: 'Rachadura no concreto próxima a um rail, com pichação ao fundo' },
+  { id: 'quadra-basquete', src: quadraBasquete, thumb: quadraBasqueteThumb, alt: 'Jovem jogando basquete na quadra vista através da tela rasgada' },
+  { id: 'mesa-jogos', src: mesaJogos, thumb: mesaJogosThumb, alt: 'Mesa de jogos de concreto na área de convivência ao lado da pista' },
+  { id: 'grafite-muro', src: grafiteMuro, thumb: grafiteMuroThumb, alt: 'Rachadura no piso e pichação colorida em muro da pista' },
+  { id: 'mural-arte', src: muralArte, thumb: muralArteThumb, alt: 'Arte local pintada em um dos módulos da pista' },
 ];
 
 export const PROJECT_PARTNERS: ProjectPartner[] = [

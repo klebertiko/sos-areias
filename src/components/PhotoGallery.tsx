@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight, Camera, FolderOpen, ExternalLink } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Camera } from 'lucide-react';
 import { TrackPhoto } from '../types';
-import { PHOTOS_DRIVE_URL } from '../data/mockData';
 
 interface PhotoGalleryProps {
   photos: TrackPhoto[];
@@ -31,21 +30,11 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex items-center gap-2">
         <h4 className="font-bold text-white text-sm flex items-center gap-2">
           <Camera size={16} className="text-yellow-500" />
           Como a pista está hoje
         </h4>
-        <a
-          href={PHOTOS_DRIVE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1 text-xs font-mono text-zinc-400 hover:text-yellow-400 transition-colors shrink-0"
-        >
-          <FolderOpen size={12} />
-          Ver todas
-          <ExternalLink size={10} />
-        </a>
       </div>
 
       <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">

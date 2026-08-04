@@ -1,25 +1,15 @@
-import React, { useState } from 'react';
-import { Eye, Hammer, Sparkles, MapPin, CheckCircle2, Flame } from 'lucide-react';
+import React from 'react';
+import { Hammer, MapPin, CheckCircle2, Flame } from 'lucide-react';
 import skateparkPixelImg from '../assets/images/areias_skatepark_pixelart_1784690180741.webp';
 
 interface HeroSectionProps {
   onOpenDonation: (amount?: string) => void;
 }
 
-// Illustrative stock placeholder — real photos of the park live in the Google Drive folder linked in AboutProject
-const PLACEHOLDER_PHOTO_URL = "https://images.unsplash.com/photo-1547447134-cd3f5c716030?q=80&w=1200&auto=format&fit=crop";
-
-const VIEW_MODES: { mode: 'pixel' | 'photo'; icon: typeof Sparkles; label: string }[] = [
-  { mode: 'pixel', icon: Sparkles, label: 'Arte Digital' },
-  { mode: 'photo', icon: Eye, label: 'Foto Ilustrativa' },
-];
-
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenDonation }) => {
-  const [viewMode, setViewMode] = useState<'pixel' | 'photo'>('pixel');
-
   return (
     <section className="space-y-6">
-      
+
       {/* Hero Header Badge */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
@@ -32,34 +22,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenDonation }) => {
             Areias do Campeche • Florianópolis/SC
           </span>
         </div>
-
-        {/* View mode switcher */}
-        <div className="flex items-center bg-zinc-900 border border-zinc-800 p-1 rounded-xl text-xs font-mono">
-          {VIEW_MODES.map(({ mode, icon: Icon, label }) => (
-            <button
-              key={mode}
-              onClick={() => setViewMode(mode)}
-              className={`px-3 py-1 rounded-lg transition-colors flex items-center gap-1.5 ${
-                viewMode === mode
-                  ? 'bg-yellow-500 text-zinc-950 font-bold'
-                  : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              <Icon size={13} />
-              {label}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* Main Hero Image Frame */}
       <div className="relative h-72 sm:h-96 md:h-[420px] w-full rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950 group shadow-2xl flex items-center justify-center">
         <img
-          src={viewMode === 'pixel' ? skateparkPixelImg : PLACEHOLDER_PHOTO_URL}
+          src={skateparkPixelImg}
           alt="Pista de Skate de Areias"
-          className={`w-full h-full object-cover transition-all duration-500 ${
-            viewMode === 'pixel' ? 'pixelated scale-[1.01] group-hover:scale-105' : 'group-hover:scale-105'
-          }`}
+          className="w-full h-full object-cover pixelated scale-[1.01] group-hover:scale-105 transition-all duration-500"
           referrerPolicy="no-referrer"
         />
 
@@ -69,7 +39,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenDonation }) => {
         {/* Real park indicator badge */}
         <div className="absolute top-4 right-4 bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-yellow-400 font-mono text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-lg">
           <div className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
-          <span>Projeto Pista de Areias</span>
+          <span>Arte digital meramente ilustrativa</span>
         </div>
 
         {/* Title Overlay */}
