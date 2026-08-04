@@ -361,7 +361,7 @@ export default function App() {
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes shimmer {
           0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
+          100% { transform: translateX(400%); }
         }
         @keyframes slideUp {
           from { opacity: 0; transform: translateY(16px) scale(0.97); }

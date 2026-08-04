@@ -42,11 +42,11 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
         {/* Progress Bar Container */}
         <div className="relative w-full bg-zinc-950 rounded-full h-5 p-1 border border-zinc-800 overflow-hidden my-3">
           <div
-            className="bg-gradient-to-r from-red-600 to-red-400 h-full rounded-full transition-all duration-700 relative shadow-[0_0_12px_rgba(239,68,68,0.5)]"
+            className="bg-gradient-to-r from-red-600 to-red-400 h-full rounded-full transition-all duration-700 relative shadow-[0_0_12px_rgba(239,68,68,0.5)] overflow-hidden"
             style={{ width: `${progressPercent}%` }}
           >
-            {/* Shimmer line */}
-            <div className="absolute inset-0 bg-white/20 w-full h-full animate-[shimmer_2s_infinite]" />
+            {/* Shimmer sweep */}
+            <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/50 to-transparent animate-[shimmer_2s_infinite]" />
           </div>
         </div>
 

@@ -20,18 +20,6 @@ variable "vercel_team_id" {
   type        = string
 }
 
-variable "database_url" {
-  description = "Pooled Neon connection string, same value as DATABASE_URL in .env.local."
-  type        = string
-  sensitive   = true
-}
-
-variable "database_url_unpooled" {
-  description = "Unpooled Neon connection string, same value as DATABASE_URL_UNPOOLED in .env.local."
-  type        = string
-  sensitive   = true
-}
-
 variable "admin_passcode" {
   description = "Admin panel passcode, same value as ADMIN_PASSCODE in .env.local."
   type        = string
