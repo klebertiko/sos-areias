@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Copy, CheckCircle2, Heart, Hammer, Sparkles, QrCode, ShieldCheck, Shirt, Phone, Mail, User } from 'lucide-react';
+import { X, Copy, CheckCircle2, Heart, Hammer, Sparkles, QrCode, ShieldCheck, Phone, Mail, User } from 'lucide-react';
 import { drawPixelQrCode, generatePixPayload } from '../utils/pix';
-import { RewardTier, SkateStance, Supporter } from '../types';
+import { SkateStance, Supporter } from '../types';
 
 interface PixModalProps {
   isOpen: boolean;
   initialAmount?: string;
   pixKey: string;
-  rewards: RewardTier[];
   onClose: () => void;
   onConfirmDonation: (supporterData: Omit<Supporter, 'id' | 'date' | 'likes'>) => void;
 }
@@ -16,7 +15,6 @@ export const PixModal: React.FC<PixModalProps> = ({
   isOpen,
   initialAmount = '50',
   pixKey,
-  rewards,
   onClose,
   onConfirmDonation,
 }) => {
@@ -26,7 +24,6 @@ export const PixModal: React.FC<PixModalProps> = ({
   const [donorPhone, setDonorPhone] = useState('');
   const [donorEmail, setDonorEmail] = useState('');
   const [donorStance, setDonorStance] = useState<SkateStance>('Regular');
-  const [donorShirtSize, setDonorShirtSize] = useState<string>('G');
   const [donorMessage, setDonorMessage] = useState('');
   const [agreedLgpd, setAgreedLgpd] = useState(true);
 
@@ -37,12 +34,6 @@ export const PixModal: React.FC<PixModalProps> = ({
 
   const numericAmount = parseFloat(amount) || 0;
   const pixPayload = generatePixPayload(pixKey, numericAmount);
-
-  const shirtRewardAmounts = rewards
-    .filter((r) => r.items.some((item) => item.toLowerCase().includes('camiseta')))
-    .map((r) => r.amount);
-  const shirtThreshold = shirtRewardAmounts.length > 0 ? Math.min(...shirtRewardAmounts) : null;
-  const unlocksShirt = shirtThreshold !== null && numericAmount >= shirtThreshold;
 
   useEffect(() => {
     if (initialAmount) {
@@ -87,7 +78,6 @@ export const PixModal: React.FC<PixModalProps> = ({
         message: donorMessage.trim() || 'Apoiou a reforma da pista!',
         phone: donorPhone.trim() || undefined,
         email: donorEmail.trim() || undefined,
-        shirtSize: unlocksShirt ? donorShirtSize : undefined,
       });
       setSimulating(false);
       onClose();
@@ -211,15 +201,15 @@ export const PixModal: React.FC<PixModalProps> = ({
             </div>
           </div>
 
-          {/* Detailed Form for Instant Confirmation & Reward Fulfillment */}
+          {/* Detailed Form for Instant Confirmation */}
           <form onSubmit={handleSimulatePayment} className="space-y-4 bg-zinc-950/80 p-4 sm:p-5 border border-zinc-800 rounded-2xl">
             <div className="border-b border-zinc-800 pb-2">
               <p className="text-xs font-mono text-yellow-400 font-bold uppercase flex items-center gap-1.5">
                 <Sparkles size={15} />
-                2. Cadastro para o Mural e Entrega de Recompensas:
+                2. Cadastro para o Mural de Apoiadores:
               </p>
               <p className="text-[11px] text-zinc-400 mt-0.5">
-                Preencha para ter seu nome no mural e permitir o contato para entrega dos prêmios (Camiseta/Kit).
+                Preencha para ter seu nome no mural e permitir o contato de confirmação da doação.
               </p>
             </div>
 
@@ -282,41 +272,19 @@ export const PixModal: React.FC<PixModalProps> = ({
               </div>
             </div>
 
-            {/* Shirt Size (If Amount >= 250) & Stance */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {unlocksShirt && (
-                <div>
-                  <label className="text-[11px] font-mono text-yellow-400 font-bold block mb-1 flex items-center gap-1">
-                    <Shirt size={14} />
-                    Tamanho da Camiseta Oficial:
-                  </label>
-                  <select
-                    value={donorShirtSize}
-                    onChange={(e) => setDonorShirtSize(e.target.value)}
-                    className="w-full bg-zinc-900 border border-yellow-500/50 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-yellow-500 font-bold"
-                  >
-                    <option value="P">P (Pequeno)</option>
-                    <option value="M">M (Médio)</option>
-                    <option value="G">G (Grande)</option>
-                    <option value="GG">GG (Extra Grande)</option>
-                    <option value="XG">XG (Especial)</option>
-                  </select>
-                </div>
-              )}
-
-              <div>
-                <label className="text-[11px] font-mono text-zinc-400 block mb-1">Sua Base no Skate:</label>
-                <select
-                  value={donorStance}
-                  onChange={(e) => setDonorStance(e.target.value as SkateStance)}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-yellow-500"
-                >
-                  <option value="Regular">Regular</option>
-                  <option value="Goofy">Goofy</option>
-                  <option value="Local">Local de Areias</option>
-                  <option value="Simpatizante">Simpatizante / Amigo do Skate</option>
-                </select>
-              </div>
+            {/* Stance */}
+            <div>
+              <label className="text-[11px] font-mono text-zinc-400 block mb-1">Sua Base no Skate:</label>
+              <select
+                value={donorStance}
+                onChange={(e) => setDonorStance(e.target.value as SkateStance)}
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-yellow-500"
+              >
+                <option value="Regular">Regular</option>
+                <option value="Goofy">Goofy</option>
+                <option value="Local">Local de Areias</option>
+                <option value="Simpatizante">Simpatizante / Amigo do Skate</option>
+              </select>
             </div>
 
             {/* Message */}
@@ -341,7 +309,7 @@ export const PixModal: React.FC<PixModalProps> = ({
                 className="mt-0.5 rounded accent-yellow-500"
               />
               <label htmlFor="lgpdConsentCheck" className="text-[10px] text-zinc-400 leading-tight">
-                Concordo com o uso dos meus dados de contato (WhatsApp/Email) para envio de confirmações e logística de entrega das recompensas (LGPD Lei nº 13.709/2018).
+                Concordo com o uso dos meus dados de contato (WhatsApp/Email) para envio de confirmações da doação (LGPD Lei nº 13.709/2018).
               </label>
             </div>
 
@@ -351,7 +319,7 @@ export const PixModal: React.FC<PixModalProps> = ({
               className="w-full bg-yellow-500 hover:bg-yellow-400 text-zinc-950 font-black py-3 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-[0_0_15px_rgba(234,179,8,0.2)] disabled:opacity-50 flex items-center justify-center gap-2 text-sm uppercase tracking-wide"
             >
               {simulating ? (
-                <span className="font-mono text-xs animate-pulse">Registrando PIX e Recompensa...</span>
+                <span className="font-mono text-xs animate-pulse">Registrando PIX...</span>
               ) : (
                 <>
                   <Heart className="fill-current" size={18} />

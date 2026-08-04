@@ -17,11 +17,10 @@ import {
   DEFAULT_PIX_KEY,
   INITIAL_GOAL,
   INITIAL_RAISED,
-  INITIAL_REWARDS,
   INITIAL_SUPPORTERS,
   TIMELINE_STEPS,
 } from './data/mockData';
-import { RewardTier, Supporter, TimelineStep } from './types';
+import { Supporter, TimelineStep } from './types';
 import { soundEngine } from './utils/audio';
 
 export default function App() {
@@ -58,15 +57,6 @@ export default function App() {
     }
   });
 
-  const [rewards, setRewards] = useState<RewardTier[]>(() => {
-    const saved = localStorage.getItem('areias_rewards_v3');
-    try {
-      return saved ? JSON.parse(saved) : INITIAL_REWARDS;
-    } catch {
-      return INITIAL_REWARDS;
-    }
-  });
-
   const [isPixOpen, setIsPixOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
@@ -94,10 +84,6 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('areias_timeline_v3', JSON.stringify(timelineSteps));
   }, [timelineSteps]);
-
-  useEffect(() => {
-    localStorage.setItem('areias_rewards_v3', JSON.stringify(rewards));
-  }, [rewards]);
 
   const handleOpenDonation = useCallback((amount = '50') => {
     soundEngine.playClickSound();
@@ -202,13 +188,12 @@ export default function App() {
 
         </div>
 
-        {/* Right Column: Dynamic Donation & Rewards Sidebar */}
+        {/* Right Column: Dynamic Donation Sidebar */}
         <div className="lg:col-span-5 xl:col-span-4">
           <ProgressBar
             raised={raised}
             goal={totalGoal}
             supporterCount={supporters.length}
-            rewards={rewards}
             onOpenDonation={handleOpenDonation}
             onOpenShare={() => {
               soundEngine.playClickSound();
@@ -273,7 +258,6 @@ export default function App() {
         isOpen={isPixOpen}
         initialAmount={selectedAmount}
         pixKey={pixKey}
-        rewards={rewards}
         onClose={() => setIsPixOpen(false)}
         onConfirmDonation={handleAddSupporter}
       />
@@ -299,8 +283,6 @@ export default function App() {
         onUpdateGoal={setTotalGoal}
         raised={raised}
         onUpdateRaised={setRaised}
-        rewards={rewards}
-        onUpdateRewards={setRewards}
         supporters={supporters}
         onAddSupporter={handleAddSupporter}
         onEditSupporter={handleEditSupporter}

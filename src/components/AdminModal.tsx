@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, Lock, Key, Calendar, Plus, Trash2, Pencil, Check, CheckCircle2, Save, ShieldAlert, Users, Shirt, Phone, Mail, Gift, Star } from 'lucide-react';
-import { RewardTier, Supporter, TimelineStep } from '../types';
+import { X, Lock, Key, Calendar, Plus, Trash2, Pencil, Check, CheckCircle2, Save, ShieldAlert, Users, Phone, Mail } from 'lucide-react';
+import { Supporter, TimelineStep } from '../types';
 import { INITIAL_GOAL } from '../data/mockData';
 
 const ADMIN_PASSCODES = ['areias.plaza'];
@@ -15,8 +15,6 @@ interface AdminModalProps {
   onUpdateGoal: (goal: number) => void;
   raised: number;
   onUpdateRaised: (raised: number) => void;
-  rewards: RewardTier[];
-  onUpdateRewards: (rewards: RewardTier[]) => void;
   supporters: Supporter[];
   onAddSupporter: (data: Omit<Supporter, 'id' | 'date' | 'likes'>) => void;
   onEditSupporter: (id: string, updates: Partial<Pick<Supporter, 'name' | 'amount'>>) => void;
@@ -34,8 +32,6 @@ export const AdminModal: React.FC<AdminModalProps> = ({
   onUpdateGoal,
   raised,
   onUpdateRaised,
-  rewards,
-  onUpdateRewards,
   supporters,
   onAddSupporter,
   onEditSupporter,
@@ -51,19 +47,12 @@ export const AdminModal: React.FC<AdminModalProps> = ({
   const [editableGoal, setEditableGoal] = useState(totalGoal.toString());
   const [editableRaised, setEditableRaised] = useState(raised.toString());
   const [steps, setSteps] = useState<TimelineStep[]>(timelineSteps);
-  const [rewardsList, setRewardsList] = useState<RewardTier[]>(rewards);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
   // New Step form state
   const [newTitle, setNewTitle] = useState('');
   const [newDate, setNewDate] = useState('');
   const [newDesc, setNewDesc] = useState('');
-
-  // New Reward form state
-  const [newRewardTitle, setNewRewardTitle] = useState('');
-  const [newRewardAmount, setNewRewardAmount] = useState('');
-  const [newRewardDesc, setNewRewardDesc] = useState('');
-  const [newRewardItems, setNewRewardItems] = useState('');
 
   // New manual donation form state
   const [newDonorName, setNewDonorName] = useState('');
@@ -93,7 +82,6 @@ export const AdminModal: React.FC<AdminModalProps> = ({
     const parsedRaised = parseFloat(editableRaised);
     onUpdateRaised(Number.isNaN(parsedRaised) ? raised : Math.max(0, parsedRaised));
     onUpdateTimelineSteps(steps);
-    onUpdateRewards(rewardsList);
 
     setSaveSuccess(true);
     setTimeout(() => setSaveSuccess(false), 2500);
@@ -127,34 +115,6 @@ export const AdminModal: React.FC<AdminModalProps> = ({
     setNewTitle('');
     setNewDate('');
     setNewDesc('');
-  };
-
-  const handleDeleteReward = (id: string) => {
-    setRewardsList((prev) => prev.filter((r) => r.id !== id));
-  };
-
-  const handleTogglePopularReward = (id: string) => {
-    setRewardsList((prev) => prev.map((r) => (r.id === id ? { ...r, popular: !r.popular } : r)));
-  };
-
-  const handleAddReward = (e: React.FormEvent) => {
-    e.preventDefault();
-    const parsedAmount = parseFloat(newRewardAmount);
-    if (!newRewardTitle.trim() || Number.isNaN(parsedAmount) || parsedAmount <= 0) return;
-
-    const newReward: RewardTier = {
-      id: `reward_${Date.now()}`,
-      title: newRewardTitle.trim(),
-      amount: parsedAmount,
-      description: newRewardDesc.trim() || 'Recompensa cadastrada pelo Painel do Coletivo.',
-      items: newRewardItems.split(',').map((item) => item.trim()).filter(Boolean),
-    };
-
-    setRewardsList((prev) => [...prev, newReward].sort((a, b) => a.amount - b.amount));
-    setNewRewardTitle('');
-    setNewRewardAmount('');
-    setNewRewardDesc('');
-    setNewRewardItems('');
   };
 
   const handleAddDonation = (e: React.FormEvent) => {
@@ -199,7 +159,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
             </div>
             <div>
               <h3 className="font-bold text-white text-xl">Painel de Gestão do Coletivo</h3>
-              <p className="text-xs text-zinc-400 font-mono">Gerenciamento de PIX, Progresso, Cronograma, Recompensas e Doações</p>
+              <p className="text-xs text-zinc-400 font-mono">Gerenciamento de PIX, Progresso, Cronograma e Doações</p>
             </div>
           </div>
 
@@ -390,109 +350,12 @@ export const AdminModal: React.FC<AdminModalProps> = ({
               </form>
             </div>
 
-            {/* Rewards Management */}
-            <div className="bg-zinc-950 p-4 sm:p-5 rounded-2xl border border-zinc-800 space-y-4">
-              <h4 className="font-bold text-white text-base flex items-center gap-2">
-                <Gift className="text-yellow-400" size={18} />
-                Gerenciar Recompensas para Doadores
-              </h4>
-
-              <div className="space-y-2">
-                {rewardsList.map((reward) => (
-                  <div
-                    key={reward.id}
-                    className="bg-zinc-900 border border-zinc-800 p-3 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
-                  >
-                    <div className="space-y-0.5 max-w-sm">
-                      <p className="font-bold text-white text-sm flex items-center gap-1.5">
-                        {reward.title}
-                        {reward.popular && <Star size={12} className="text-yellow-400 fill-current" />}
-                      </p>
-                      <p className="text-zinc-400 text-[11px] font-mono">R$ {reward.amount} • {reward.description}</p>
-                      {reward.items.length > 0 && (
-                        <p className="text-zinc-500 text-[10px] font-mono">{reward.items.join(' · ')}</p>
-                      )}
-                    </div>
-
-                    <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
-                      <button
-                        onClick={() => handleTogglePopularReward(reward.id)}
-                        className={`p-1.5 rounded-lg transition-colors ${
-                          reward.popular ? 'text-yellow-400 bg-zinc-950' : 'text-zinc-500 hover:text-yellow-400 hover:bg-zinc-950'
-                        }`}
-                        title="Marcar/desmarcar como recompensa em destaque"
-                      >
-                        <Star size={16} className={reward.popular ? 'fill-current' : ''} />
-                      </button>
-
-                      <button
-                        onClick={() => handleDeleteReward(reward.id)}
-                        className="p-1.5 text-zinc-500 hover:text-red-400 hover:bg-zinc-950 rounded-lg transition-colors"
-                        title="Remover recompensa"
-                      >
-                        <Trash2 size={16} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Add New Reward Form */}
-              <form onSubmit={handleAddReward} className="pt-3 border-t border-zinc-800/80 space-y-2">
-                <p className="text-xs font-mono font-bold text-yellow-400 uppercase flex items-center gap-1">
-                  <Plus size={14} />
-                  Adicionar Nova Recompensa:
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  <input
-                    type="text"
-                    placeholder="Título (ex: Boné Exclusivo)"
-                    value={newRewardTitle}
-                    onChange={(e) => setNewRewardTitle(e.target.value)}
-                    className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-white"
-                  />
-                  <input
-                    type="number"
-                    placeholder="Valor mínimo (R$)"
-                    value={newRewardAmount}
-                    onChange={(e) => setNewRewardAmount(e.target.value)}
-                    className="bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-white"
-                  />
-                </div>
-
-                <input
-                  type="text"
-                  placeholder="Descrição da recompensa..."
-                  value={newRewardDesc}
-                  onChange={(e) => setNewRewardDesc(e.target.value)}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-white"
-                />
-
-                <input
-                  type="text"
-                  placeholder="Itens inclusos, separados por vírgula"
-                  value={newRewardItems}
-                  onChange={(e) => setNewRewardItems(e.target.value)}
-                  className="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs text-white"
-                />
-
-                <button
-                  type="submit"
-                  disabled={!newRewardTitle.trim() || !newRewardAmount.trim()}
-                  className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs rounded-lg transition-colors disabled:opacity-50"
-                >
-                  Adicionar Recompensa
-                </button>
-              </form>
-            </div>
-
-            {/* Supporters & Reward Fulfillment List */}
+            {/* Supporters List */}
             <div className="bg-zinc-950 p-4 sm:p-5 rounded-2xl border border-zinc-800 space-y-4">
               <div className="flex items-center justify-between">
                 <h4 className="font-bold text-white text-base flex items-center gap-2">
                   <Users className="text-yellow-400" size={18} />
-                  Apoiadores & Recompensas ({supporters.length})
+                  Apoiadores ({supporters.length})
                 </h4>
                 <span className="text-[11px] font-mono text-zinc-400">
                   Total Arrecadado: R$ {raised.toLocaleString('pt-BR')}
@@ -500,7 +363,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
               </div>
 
               <p className="text-xs text-zinc-400 font-mono">
-                Lista de dados colhidos para envio de camisetas e kits de recompensa (Protegido por LGPD):
+                Lista de dados colhidos dos apoiadores para contato e mural (Protegido por LGPD):
               </p>
 
               {/* Add Manual Donation Form */}
@@ -577,11 +440,6 @@ export const AdminModal: React.FC<AdminModalProps> = ({
                           ) : (
                             <span className="bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 rounded font-mono font-bold">
                               R$ {sup.amount}
-                            </span>
-                          )}
-                          {sup.shirtSize && (
-                            <span className="bg-zinc-800 text-zinc-200 px-2 py-0.5 rounded font-mono font-bold flex items-center gap-1">
-                              <Shirt size={12} /> {sup.shirtSize}
                             </span>
                           )}
                         </div>

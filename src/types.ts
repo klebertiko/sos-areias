@@ -11,16 +11,6 @@ export interface Supporter {
   likes: number;
   phone?: string;
   email?: string;
-  shirtSize?: string;
-}
-
-export interface RewardTier {
-  id: string;
-  title: string;
-  amount: number;
-  description: string;
-  items: string[];
-  popular?: boolean;
 }
 
 export type BudgetTheme = 'yellow' | 'cyan' | 'emerald' | 'purple' | 'rose';

@@ -85,7 +85,6 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
                   <li>As doações são <strong>voluntárias</strong> e feitas diretamente via PIX à chave divulgada no site — o site não processa, armazena nem tem acesso a dados bancários ou de pagamento.</li>
                   <li>Contribuições confirmadas são registradas manualmente pelos organizadores no Painel do Coletivo para atualizar o total arrecadado e o mural de apoiadores.</li>
                   <li>Por serem doações espontâneas, não há reembolso, exceto em caso comprovado de erro operacional (ex.: valor duplicado por falha técnica).</li>
-                  <li>Recompensas (adesivos, camiseta, nome no mural) dependem da produção e logística do coletivo local e podem sofrer atraso conforme o andamento da obra.</li>
                 </ul>
               </div>
 
@@ -130,8 +129,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
                 </h4>
                 <ul className="list-disc pl-5 space-y-1.5 text-xs text-zinc-300">
                   <li><strong>Nome ou Apelido:</strong> utilizados para identificação e exibição no Mural de Apoiadores da pista.</li>
-                  <li><strong>Telefone / WhatsApp e E-mail:</strong> coletados exclusivamente para contato logístico e alinhamento de envio/entrega das recompensas do mutirão (adesivos e camisetas oficiais), amparado pelo Art. 7º, V da LGPD.</li>
-                  <li><strong>Tamanho da Camiseta (P, M, G, GG, XG):</strong> coletado para a produção personalizada das peças enviadas aos doadores.</li>
+                  <li><strong>Telefone / WhatsApp e E-mail:</strong> coletados exclusivamente para contato de confirmação da doação, amparado pelo Art. 7º, V da LGPD.</li>
                   <li><strong>Mensagem de Apoio e Base (Stance):</strong> exibidas no mural para incentivo comunitário do mutirão.</li>
                   <li><strong>Valor da Contribuição:</strong> utilizado unicamente para o somatório e atualização em tempo real da meta do projeto.</li>
                 </ul>
@@ -192,7 +190,6 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
                   <li><strong>Total arrecadado e meta</strong> — para manter a barra de progresso atualizada entre visitas.</li>
                   <li><strong>Mural de apoiadores</strong> — nomes, mensagens e curtidas exibidos publicamente.</li>
                   <li><strong>Chave PIX e cronograma da obra</strong> — editáveis pelos organizadores no Painel do Coletivo.</li>
-                  <li><strong>Recompensas para doadores</strong> — lista exibida na barra lateral de apoio.</li>
                   <li><strong>Sua preferência neste banner de consentimento.</strong></li>
                 </ul>
               </div>

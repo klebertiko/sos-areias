@@ -1,4 +1,4 @@
-import { BudgetItem, ProjectPartner, RewardTier, SocialLink, SponsorBenefit, SponsorTier, Supporter, TimelineStep, TrackPhoto } from '../types';
+import { BudgetItem, ProjectPartner, SocialLink, SponsorBenefit, SponsorTier, Supporter, TimelineStep, TrackPhoto } from '../types';
 import vistaGeral1 from '../assets/images/track-photos/vista-geral-1.webp';
 import vistaGeral1Thumb from '../assets/images/track-photos/vista-geral-1-thumb.webp';
 import vistaGeral2 from '../assets/images/track-photos/vista-geral-2.webp';
@@ -106,8 +106,6 @@ export const SPONSOR_BENEFITS: SponsorBenefit[] = [
     description: 'Possibilidade de incentivo fiscal, condicionada à legislação vigente e à estrutura jurídica adotada para o apoio.'
   }
 ];
-
-export const INITIAL_REWARDS: RewardTier[] = [];
 
 export const BUDGET_ITEMS: BudgetItem[] = [
   {

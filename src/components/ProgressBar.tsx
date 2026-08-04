@@ -1,12 +1,10 @@
 import React from 'react';
-import { Heart, Share2, Users, Trophy, Sparkles, Copy, Check } from 'lucide-react';
-import { RewardTier } from '../types';
+import { Heart, Share2, Users } from 'lucide-react';
 
 interface ProgressBarProps {
   raised: number;
   goal: number;
   supporterCount: number;
-  rewards: RewardTier[];
   onOpenDonation: (amount?: string) => void;
   onOpenShare: () => void;
 }
@@ -15,7 +13,6 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   raised,
   goal,
   supporterCount,
-  rewards,
   onOpenDonation,
   onOpenShare,
 }) => {
@@ -80,54 +77,6 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
           <span>Compartilhar Vaquinha</span>
         </button>
       </div>
-
-      {/* Quick Reward Selector */}
-      {rewards.length > 0 && (
-      <div className="pt-2 border-t border-zinc-800">
-        <h4 className="font-bold text-sm text-zinc-200 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-          <Trophy size={16} className="text-yellow-500" />
-          Recompensas Simbólicas
-        </h4>
-
-        <div className="space-y-3">
-          {rewards.map((reward) => (
-            <button
-              key={reward.id}
-              onClick={() => onOpenDonation(reward.amount.toString())}
-              className={`w-full text-left p-4 rounded-xl transition-all border group relative overflow-hidden ${
-                reward.popular
-                  ? 'bg-zinc-950 border-yellow-500/60 hover:border-yellow-400 shadow-[0_0_15px_rgba(234,179,8,0.1)]'
-                  : 'bg-zinc-950/60 hover:bg-zinc-950 border-zinc-800 hover:border-zinc-700'
-              }`}
-            >
-              {reward.popular && (
-                <div className="absolute top-0 right-0 bg-yellow-500 text-zinc-950 text-[10px] font-black uppercase px-2 py-0.5 rounded-bl-lg font-mono">
-                  Mais Escolhido
-                </div>
-              )}
-
-              <div className="flex justify-between items-baseline mb-1">
-                <span className="font-mono font-black text-lg text-yellow-400">
-                  R$ {reward.amount}
-                </span>
-              </div>
-
-              <h5 className="font-bold text-sm text-zinc-100 group-hover:text-yellow-400 transition-colors">
-                {reward.title}
-              </h5>
-
-              <p className="text-xs text-zinc-400 mt-1 line-clamp-2">
-                {reward.description}
-              </p>
-
-              <div className="mt-2.5 pt-2 border-t border-zinc-900 flex items-center text-[11px] text-yellow-500/80 font-mono">
-                <span>Clique para selecionar R$ {reward.amount} →</span>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-      )}
 
       {/* Trust Notice */}
       <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl text-center">
