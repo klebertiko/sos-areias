@@ -8,3 +8,32 @@ variable "neon_project_id" {
   description = "Existing Neon project ID for S.O.S Areias (console.neon.tech → Project settings → General)."
   type        = string
 }
+
+variable "vercel_api_token" {
+  description = "Vercel Personal Access Token (vercel.com/account/tokens). NOT the CLI's local OAuth session."
+  type        = string
+  sensitive   = true
+}
+
+variable "vercel_team_id" {
+  description = "Vercel team ID that owns the project (from `vercel link` output or Team Settings → General)."
+  type        = string
+}
+
+variable "database_url" {
+  description = "Pooled Neon connection string, same value as DATABASE_URL in .env.local."
+  type        = string
+  sensitive   = true
+}
+
+variable "database_url_unpooled" {
+  description = "Unpooled Neon connection string, same value as DATABASE_URL_UNPOOLED in .env.local."
+  type        = string
+  sensitive   = true
+}
+
+variable "admin_passcode" {
+  description = "Admin panel passcode, same value as ADMIN_PASSCODE in .env.local."
+  type        = string
+  sensitive   = true
+}
