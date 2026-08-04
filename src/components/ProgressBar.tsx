@@ -19,7 +19,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   const progressPercent = Math.min((raised / goal) * 100, 100);
 
   return (
-    <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 sticky top-20 shadow-2xl space-y-6">
+    <div className="bg-zinc-900 rounded-2xl p-6 border border-zinc-800 shadow-2xl space-y-6">
       
       {/* Financial Numbers */}
       <div>

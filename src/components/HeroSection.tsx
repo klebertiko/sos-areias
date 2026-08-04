@@ -60,15 +60,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenDonation }) => {
         </h3>
 
         <p>
-          Salve família do skate! A pista pública de Areias do Campeche, na Rua Jardim dos Eucaliptos, entre os bairros Campeche e Morro das Pedras, é um importante espaço de convivência comunitária, prática esportiva e desenvolvimento cultural — recebendo diariamente crianças, jovens e adultos de diferentes níveis de experiência. Recentemente, a própria comunidade já mobilizou esforços para promover melhorias e reparos no espaço, demonstrando o quanto a pista importa pra população local.
+          Salve família do skate! A pista pública de Areias do Campeche (Rua Jardim dos Eucaliptos, entre Campeche e Morro das Pedras) é um espaço vivo de esporte, convivência e cultura, usado diariamente por crianças, jovens e adultos. A própria comunidade já mobilizou reparos por conta própria — prova do quanto esse espaço importa.
         </p>
 
         <p>
-          Com o tempo, o desgaste natural do uso intenso e a exposição às chuvas deixaram marcas sérias: fissuras extensas, trechos de concreto desplacado e uma drenagem inadequada que só agrava as rachaduras. Os corrimãos e copings de metal também estão oxidados e desalinhados, comprometendo a segurança de quem anda ali.
+          Anos de uso intenso e chuva deixaram marcas sérias: fissuras extensas, concreto desplacado, drenagem inadequada e corrimãos/copings oxidados e desalinhados — comprometendo a segurança de quem anda ali.
         </p>
 
         <p className="bg-zinc-950 border-l-4 border-red-500 p-4 rounded-r-xl font-medium text-zinc-200 text-sm sm:text-base">
-          💡 <strong className="text-red-400">Objetivo da Campanha:</strong> O projeto técnico da Ruaria Skateparks orça a revitalização completa em R$ 55.370 — mas a obra não vai esperar chegar nesse valor pra começar. A previsão é entrar em execução já em setembro ou outubro, mesmo sem ter atingido 100% da meta. Cada real arrecadado acelera a lapidação, a resinagem e o retorno da pista pra comunidade.
+          💡 <strong className="text-red-400">Objetivo da Campanha:</strong> A revitalização completa está orçada em R$ 55.370 pela Ruaria Skateparks — mas a obra começa em setembro ou outubro mesmo sem atingir 100% da meta. Cada real acelera a lapidação, a resinagem e o retorno da pista à comunidade.
         </p>
 
         <div className="pt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 w-full text-xs font-semibold text-zinc-300">

@@ -53,7 +53,7 @@ export const BudgetBreakdown: React.FC<BudgetBreakdownProps> = ({ items, totalGo
           Transparência: Onde cada centavo será investido?
         </h3>
         <p className="text-sm text-zinc-400">
-          Orçamento técnico oficial elaborado pela Ruaria Skateparks, com base em vistoria in loco e cotações reais de materiais, insumos diamantados e mão de obra especializada.
+          Orçamento técnico da Ruaria Skateparks, com base em vistoria in loco e cotações reais de materiais, insumos e mão de obra.
         </p>
       </div>
 
@@ -192,7 +192,7 @@ export const BudgetBreakdown: React.FC<BudgetBreakdownProps> = ({ items, totalGo
 
       {/* Note about execution model */}
       <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-xs text-red-300/90 leading-relaxed font-medium">
-        💬 <strong>Execução Profissional + Mutirão:</strong> Lapidar e resinar o concreto exige equipamento e mão de obra especializada, por isso parte do valor cobre a equipe técnica da Ruaria Skateparks. A comunidade contribui com mutirões de apoio — limpeza, logística, alimentação e divulgação.
+        💬 <strong>Execução Profissional + Mutirão:</strong> Lapidar e resinar concreto exige equipe especializada — por isso parte do valor cobre a Ruaria Skateparks. A comunidade contribui com mutirões de limpeza, logística, alimentação e divulgação.
       </div>
 
     </section>

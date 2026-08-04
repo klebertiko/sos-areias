@@ -1,4 +1,4 @@
-import { BudgetItem, ProjectPartner, SocialLink, SponsorBenefit, SponsorTier, Supporter, TimelineStep, TrackPhoto } from '../types';
+import { BudgetItem, ProjectPartner, Raffle, SocialLink, SponsorBenefit, SponsorTier, Supporter, TimelineStep, TrackPhoto } from '../types';
 import vistaGeral1 from '../assets/images/track-photos/vista-geral-1.webp';
 import vistaGeral1Thumb from '../assets/images/track-photos/vista-geral-1-thumb.webp';
 import vistaGeral2 from '../assets/images/track-photos/vista-geral-2.webp';
@@ -34,6 +34,16 @@ export const INITIAL_GOAL = 55370;
 export const INITIAL_RAISED = 5206.70;
 export const DEFAULT_PIX_KEY = "areias.plaza@gmail.com";
 
+export const RAFFLES: Raffle[] = [
+  {
+    id: 'reforma-areias-1',
+    title: 'Rifa Reforma Areias Skate Plaza',
+    description: 'Concorra a prêmios e ajude a arrecadar para a reforma da pista.',
+    url: 'https://rifapersonalizada.com.br/reforma-areias-skate-plaza-uCWWyw',
+    status: 'ativa'
+  }
+];
+
 export const TRACK_PHOTOS: TrackPhoto[] = [
   { id: 'vista-geral-1', src: vistaGeral1, thumb: vistaGeral1Thumb, alt: 'Vista geral da pista de Areias do Campeche' },
   { id: 'vista-geral-2', src: vistaGeral2, thumb: vistaGeral2Thumb, alt: 'Vista geral da pista com a quadra de basquete ao fundo' },
@@ -63,7 +73,7 @@ export const PROJECT_PARTNERS: ProjectPartner[] = [
     id: 'comunidade',
     name: 'Comunidade do Skate de Areias',
     role: 'Mobilização & Mutirão',
-    description: 'Skatistas e moradores do Campeche e Morro das Pedras que já vinham cuidando da pista por conta própria. Tocam a campanha, o mutirão de apoio e a divulgação nas contas @biometryskateboard, @areias_skate_plaza e @floripaskateboard.'
+    description: 'Skatistas e moradores do Campeche e Morro das Pedras que já cuidavam da pista por conta própria. Tocam a campanha, o mutirão de apoio e a divulgação nas redes sociais do projeto.'
   }
 ];
 
@@ -84,12 +94,12 @@ export const SPONSOR_BENEFITS: SponsorBenefit[] = [
   {
     id: 'marca',
     title: 'Fortalecimento da Marca',
-    description: 'Associação da empresa a uma causa social e esportiva legítima, incluindo ganhos de reputação em critérios ESG.'
+    description: 'Associação a uma causa social e esportiva legítima, com ganhos de reputação em critérios ESG.'
   },
   {
     id: 'marketing',
     title: 'Marketing e Visibilidade',
-    description: 'Exposição da marca junto à comunidade do skate e nos canais oficiais do projeto durante toda a revitalização.'
+    description: 'Exposição da marca junto à comunidade do skate e nos canais oficiais do projeto.'
   },
   {
     id: 'institucional',

@@ -20,7 +20,7 @@ export const AboutProject: React.FC = () => {
       </div>
 
       <p className="text-zinc-300 leading-relaxed text-sm sm:text-base">
-        Nos últimos meses, a própria comunidade de Areias já vinha se mobilizando e fazendo reparos por conta própria para conter o avanço das rachaduras. Foi esse movimento espontâneo que motivou a aproximação com a Ruaria Skateparks, empresa especializada em pistas de skate, que fez a vistoria técnica completa e assinou o projeto oficial de revitalização. Da união entre o conhecimento técnico da Ruaria e a mobilização da comunidade nasceu essa campanha.
+        A comunidade de Areias já vinha fazendo reparos por conta própria para conter as rachaduras. Esse movimento motivou a parceria com a Ruaria Skateparks, que fez a vistoria técnica completa e assinou o projeto oficial de revitalização — unindo conhecimento técnico e mobilização comunitária nessa campanha.
       </p>
 
       <div className="grid sm:grid-cols-2 gap-4">
@@ -43,7 +43,7 @@ export const AboutProject: React.FC = () => {
           <span className="font-bold text-white text-sm">Empresa quer apoiar? Existem cotas de patrocínio</span>
         </div>
         <p className="text-xs text-zinc-400 leading-relaxed">
-          O valor total de R$ 55.370 também pode ser assumido, integral ou parcialmente, por empresas parceiras — com contrapartidas de marca no projeto. Fale com a gente pelo Instagram ou pelo PIX de contato.
+          O valor de R$ 55.370 também pode ser assumido, total ou parcialmente, por empresas parceiras — com contrapartidas de marca. Fale com a gente pelo Instagram.
         </p>
         <div className="flex flex-wrap gap-2 text-xs font-mono">
           {SPONSOR_TIERS.map((tier) => (

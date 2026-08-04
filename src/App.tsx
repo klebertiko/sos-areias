@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { AboutProject } from './components/AboutProject';
 import { ProgressBar } from './components/ProgressBar';
+import { RaffleSection } from './components/RaffleSection';
 import { BudgetBreakdown } from './components/BudgetBreakdown';
 import { ProjectTimeline } from './components/ProjectTimeline';
 import { SupportersWall } from './components/SupportersWall';
@@ -18,6 +19,7 @@ import {
   INITIAL_GOAL,
   INITIAL_RAISED,
   INITIAL_SUPPORTERS,
+  RAFFLES,
   TIMELINE_STEPS,
 } from './data/mockData';
 import { Supporter, TimelineStep } from './types';
@@ -236,7 +238,7 @@ export default function App() {
         </div>
 
         {/* Right Column: Dynamic Donation Sidebar */}
-        <div className="lg:col-span-5 xl:col-span-4">
+        <div className="lg:col-span-5 xl:col-span-4 lg:sticky lg:top-20 space-y-6 self-start">
           <ProgressBar
             raised={raised}
             goal={totalGoal}
@@ -247,6 +249,7 @@ export default function App() {
               setIsShareOpen(true);
             }}
           />
+          <RaffleSection raffles={RAFFLES} />
         </div>
 
       </main>

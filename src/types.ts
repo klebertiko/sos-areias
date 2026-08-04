@@ -65,3 +65,11 @@ export interface TrackPhoto {
   thumb: string;
   alt: string;
 }
+
+export interface Raffle {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  status: 'ativa' | 'encerrada';
+}
