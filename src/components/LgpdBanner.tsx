@@ -58,7 +58,7 @@ export const LgpdBanner: React.FC<LgpdBannerProps> = ({ onOpenPrivacy }) => {
 
           <button
             onClick={() => handleAccept('all')}
-            className="px-4 py-2 bg-red-500 hover:bg-red-400 text-zinc-950 text-xs font-black rounded-xl transition-all shadow-[0_0_10px_rgba(239,68,68,0.2)]"
+            className="px-4 py-2 bg-red-500 hover:bg-red-400 text-white text-xs font-black rounded-xl transition-all shadow-[0_0_10px_rgba(239,68,68,0.2)]"
           >
             Aceitar Todos
           </button>

@@ -68,6 +68,7 @@ export const PROJECT_PARTNERS: ProjectPartner[] = [
 ];
 
 export const SOCIAL_LINKS: SocialLink[] = [
+  { id: 'ruaria', label: 'Ruaria Skateparks', handle: '@ruariaskateparks', url: 'https://www.instagram.com/ruariaskateparks/' },
   { id: 'biometry', label: 'Biometry Skateboard', handle: '@biometryskateboard', url: 'https://www.instagram.com/biometryskateboard/' },
   { id: 'areias', label: 'Areias Skate Plaza', handle: '@areias_skate_plaza', url: 'https://www.instagram.com/areias_skate_plaza/' },
   { id: 'floripa', label: 'Floripa Skateboard', handle: '@floripaskateboard', url: 'https://www.instagram.com/floripaskateboard/' }

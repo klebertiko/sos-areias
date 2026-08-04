@@ -63,7 +63,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
       <div className="space-y-3">
         <button
           onClick={() => onOpenDonation()}
-          className="w-full bg-red-500 hover:bg-red-400 text-zinc-950 font-black text-lg py-4 rounded-xl flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(239,68,68,0.25)]"
+          className="w-full bg-red-500 hover:bg-red-400 text-white font-black text-lg py-4 rounded-xl flex items-center justify-center gap-2.5 transition-all hover:scale-[1.02] active:scale-95 shadow-[0_0_20px_rgba(239,68,68,0.25)]"
         >
           <Heart className="fill-current" size={22} />
           <span>Fazer Doação via PIX</span>

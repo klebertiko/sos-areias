@@ -58,7 +58,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
 
         <button
           onClick={onOpenDonation}
-          className="bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500 hover:text-zinc-950 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-1.5"
+          className="bg-red-500/10 border border-red-500/30 text-red-400 hover:bg-red-500 hover:text-white px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-1.5"
         >
           <Heart size={14} className="fill-current" />
           <span>Fazer Doação para Aparecer no Mural</span>
@@ -135,7 +135,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
           </span>
           <button
             type="submit"
-            className="bg-red-500 hover:bg-red-400 text-zinc-950 font-black px-5 py-2 rounded-lg text-xs uppercase tracking-wider transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5"
+            className="bg-red-500 hover:bg-red-400 text-white font-black px-5 py-2 rounded-lg text-xs uppercase tracking-wider transition-all hover:scale-105 active:scale-95 flex items-center gap-1.5"
           >
             <Send size={14} />
             <span>Publicar Recado</span>
@@ -154,7 +154,7 @@ export const SupportersWall: React.FC<SupportersWallProps> = ({
             </p>
             <button
               onClick={onOpenDonation}
-              className="mt-3 inline-flex items-center gap-2 bg-red-500 hover:bg-red-400 text-zinc-950 font-black px-4 py-2 rounded-lg text-xs uppercase tracking-wider transition-all"
+              className="mt-3 inline-flex items-center gap-2 bg-red-500 hover:bg-red-400 text-white font-black px-4 py-2 rounded-lg text-xs uppercase tracking-wider transition-all"
             >
               <Heart size={14} className="fill-current" />
               <span>Apoiar Agora</span>

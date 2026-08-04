@@ -8,34 +8,30 @@ const ADMIN_PASSCODES = ['areias.plaza'];
 interface AdminModalProps {
   isOpen: boolean;
   pixKey: string;
-  onUpdatePixKey: (key: string) => void;
   timelineSteps: TimelineStep[];
-  onUpdateTimelineSteps: (steps: TimelineStep[]) => void;
   totalGoal: number;
-  onUpdateGoal: (goal: number) => void;
   raised: number;
-  onUpdateRaised: (raised: number) => void;
+  onSaveAll: (data: { pixKey: string; goal: number; raised: number; timelineSteps: TimelineStep[] }) => void;
   supporters: Supporter[];
   onAddSupporter: (data: Omit<Supporter, 'id' | 'date' | 'likes'>) => void;
   onEditSupporter: (id: string, updates: Partial<Pick<Supporter, 'name' | 'amount'>>) => void;
   onDeleteSupporter: (id: string) => void;
+  onAuthenticated: (passcode: string) => void;
   onClose: () => void;
 }
 
 export const AdminModal: React.FC<AdminModalProps> = ({
   isOpen,
   pixKey,
-  onUpdatePixKey,
   timelineSteps,
-  onUpdateTimelineSteps,
   totalGoal,
-  onUpdateGoal,
   raised,
-  onUpdateRaised,
+  onSaveAll,
   supporters,
   onAddSupporter,
   onEditSupporter,
   onDeleteSupporter,
+  onAuthenticated,
   onClose,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -67,21 +63,26 @@ export const AdminModal: React.FC<AdminModalProps> = ({
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (ADMIN_PASSCODES.includes(pinInput.trim().toLowerCase())) {
+    const passcode = pinInput.trim().toLowerCase();
+    if (ADMIN_PASSCODES.includes(passcode)) {
       setIsAuthenticated(true);
       setPinError(false);
+      onAuthenticated(passcode);
     } else {
       setPinError(true);
     }
   };
 
   const handleSaveAll = () => {
-    onUpdatePixKey(editablePixKey.trim());
     const parsedGoal = parseFloat(editableGoal);
-    onUpdateGoal(Number.isNaN(parsedGoal) ? INITIAL_GOAL : Math.max(0, parsedGoal));
     const parsedRaised = parseFloat(editableRaised);
-    onUpdateRaised(Number.isNaN(parsedRaised) ? raised : Math.max(0, parsedRaised));
-    onUpdateTimelineSteps(steps);
+
+    onSaveAll({
+      pixKey: editablePixKey.trim(),
+      goal: Number.isNaN(parsedGoal) ? INITIAL_GOAL : Math.max(0, parsedGoal),
+      raised: Number.isNaN(parsedRaised) ? raised : Math.max(0, parsedRaised),
+      timelineSteps: steps,
+    });
 
     setSaveSuccess(true);
     setTimeout(() => setSaveSuccess(false), 2500);
@@ -154,7 +155,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
         {/* Header */}
         <div className="flex justify-between items-center pb-4 border-b border-zinc-800">
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-red-500 text-zinc-950 rounded-xl font-mono font-bold">
+            <div className="p-2 bg-red-500 text-white rounded-xl font-mono font-bold">
               <Lock size={20} />
             </div>
             <div>
@@ -200,7 +201,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
 
             <button
               type="submit"
-              className="w-full py-3 bg-red-500 hover:bg-red-400 text-zinc-950 font-black text-sm uppercase rounded-xl transition-all shadow-lg"
+              className="w-full py-3 bg-red-500 hover:bg-red-400 text-white font-black text-sm uppercase rounded-xl transition-all shadow-lg"
             >
               Entrar no Painel
             </button>
@@ -486,7 +487,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({
             <div className="pt-2 text-right">
               <button
                 onClick={handleSaveAll}
-                className="px-6 py-3 bg-red-500 hover:bg-red-400 text-zinc-950 font-black text-sm uppercase rounded-xl transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)] flex items-center gap-2 ml-auto"
+                className="px-6 py-3 bg-red-500 hover:bg-red-400 text-white font-black text-sm uppercase rounded-xl transition-all shadow-[0_0_15px_rgba(239,68,68,0.2)] flex items-center gap-2 ml-auto"
               >
                 <Save size={18} />
                 <span>Salvar Todas as Alterações</span>

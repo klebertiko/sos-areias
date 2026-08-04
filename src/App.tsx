@@ -22,6 +22,14 @@ import {
 } from './data/mockData';
 import { Supporter, TimelineStep } from './types';
 import { soundEngine } from './utils/audio';
+import {
+  fetchState,
+  saveState,
+  addSupporterApi,
+  likeSupporterApi,
+  editSupporterAmountApi,
+  deleteSupporterApi,
+} from './utils/api';
 
 export default function App() {
   const [raised, setRaised] = useState<number>(() => {
@@ -63,6 +71,7 @@ export default function App() {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState<string>('50');
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [adminPasscode, setAdminPasscode] = useState<string | null>(null);
 
   // Save changes to localStorage
   useEffect(() => {
@@ -84,6 +93,19 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('areias_timeline_v3', JSON.stringify(timelineSteps));
   }, [timelineSteps]);
+
+  // Hydrate from Neon (source of truth) once on mount; localStorage above stays as instant-paint fallback.
+  useEffect(() => {
+    fetchState()
+      .then((state) => {
+        if (state.pixKey !== null) setPixKey(state.pixKey);
+        if (state.goal !== null) setTotalGoal(state.goal);
+        if (state.raised !== null) setRaised(state.raised);
+        if (state.timelineSteps.length > 0) setTimelineSteps(state.timelineSteps);
+        setSupporters(state.supporters);
+      })
+      .catch((err) => console.warn('Falha ao carregar dados do servidor, usando cache local:', err));
+  }, []);
 
   const handleOpenDonation = useCallback((amount = '50') => {
     soundEngine.playClickSound();
@@ -109,6 +131,7 @@ export default function App() {
 
     setSupporters((prev) => [created, ...prev]);
     setRaised((prev) => prev + newSupporter.amount);
+    addSupporterApi(newSupporter).catch((err) => console.error('Falha ao salvar apoiador:', err));
   }, []);
 
   const handleLikeSupporter = useCallback((id: string) => {
@@ -116,6 +139,7 @@ export default function App() {
     setSupporters((prev) =>
       prev.map((s) => (s.id === id ? { ...s, likes: s.likes + 1 } : s))
     );
+    likeSupporterApi(id).catch((err) => console.error('Falha ao curtir apoiador:', err));
   }, []);
 
   const handleOpenShare = useCallback(() => {
@@ -134,7 +158,10 @@ export default function App() {
       setRaised((prev) => Math.max(0, prev - sup.amount));
     }
     setSupporters((prev) => prev.filter((s) => s.id !== id));
-  }, [supporters]);
+    if (adminPasscode) {
+      deleteSupporterApi(adminPasscode, id).catch((err) => console.error('Falha ao excluir apoiador:', err));
+    }
+  }, [supporters, adminPasscode]);
 
   const handleEditSupporter = useCallback((id: string, updates: Partial<Pick<Supporter, 'name' | 'amount'>>) => {
     const sup = supporters.find((s) => s.id === id);
@@ -142,12 +169,25 @@ export default function App() {
 
     if (updates.amount !== undefined) {
       setRaised((prev) => Math.max(0, prev - sup.amount + updates.amount!));
+      if (adminPasscode) {
+        editSupporterAmountApi(adminPasscode, id, updates.amount).catch((err) => console.error('Falha ao editar apoiador:', err));
+      }
     }
     setSupporters((prev) => prev.map((s) => (s.id === id ? { ...s, ...updates } : s)));
-  }, [supporters]);
+  }, [supporters, adminPasscode]);
+
+  const handleSaveAdminState = useCallback((data: { pixKey: string; goal: number; raised: number; timelineSteps: TimelineStep[] }) => {
+    setPixKey(data.pixKey);
+    setTotalGoal(data.goal);
+    setRaised(data.raised);
+    setTimelineSteps(data.timelineSteps);
+    if (adminPasscode) {
+      saveState(adminPasscode, data).catch((err) => console.error('Falha ao salvar configurações:', err));
+    }
+  }, [adminPasscode]);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-red-500 selection:text-zinc-950 relative">
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-red-500 selection:text-white relative">
       
       {/* Top Navbar */}
       <Navbar
@@ -209,7 +249,7 @@ export default function App() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           
           <div className="flex items-center gap-2">
-            <div className="bg-red-500 text-zinc-950 p-1.5 rounded-lg font-mono font-black">
+            <div className="bg-red-500 text-white p-1.5 rounded-lg font-mono font-black">
               <Hammer size={16} />
             </div>
             <div>
@@ -265,7 +305,7 @@ export default function App() {
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-zinc-950/95 backdrop-blur-md border-t border-zinc-800 lg:hidden z-40">
         <button
           onClick={() => handleOpenDonation('50')}
-          className="w-full bg-red-500 hover:bg-red-400 text-zinc-950 font-black text-base py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(239,68,68,0.3)] active:scale-95 transition-all"
+          className="w-full bg-red-500 hover:bg-red-400 text-white font-black text-base py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(239,68,68,0.3)] active:scale-95 transition-all"
         >
           <Heart className="fill-current" size={20} />
           <span>Apoiar no PIX (R$ 50)</span>
@@ -298,17 +338,15 @@ export default function App() {
       <AdminModal
         isOpen={isAdminOpen}
         pixKey={pixKey}
-        onUpdatePixKey={setPixKey}
         timelineSteps={timelineSteps}
-        onUpdateTimelineSteps={setTimelineSteps}
         totalGoal={totalGoal}
-        onUpdateGoal={setTotalGoal}
         raised={raised}
-        onUpdateRaised={setRaised}
+        onSaveAll={handleSaveAdminState}
         supporters={supporters}
         onAddSupporter={handleAddSupporter}
         onEditSupporter={handleEditSupporter}
         onDeleteSupporter={handleDeleteSupporter}
+        onAuthenticated={setAdminPasscode}
         onClose={() => setIsAdminOpen(false)}
       />
 

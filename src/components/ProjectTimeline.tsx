@@ -32,7 +32,7 @@ export const ProjectTimeline: React.FC<ProjectTimelineProps> = ({ steps }) => {
                   isDone
                     ? 'bg-green-500 border-green-400 text-zinc-950'
                     : isActive
-                    ? 'bg-red-500 border-red-400 text-zinc-950 animate-pulse'
+                    ? 'bg-red-500 border-red-400 text-white animate-pulse'
                     : 'bg-zinc-950 border-zinc-700 text-zinc-500'
                 }`}
               >

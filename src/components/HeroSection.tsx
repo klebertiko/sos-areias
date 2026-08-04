@@ -13,7 +13,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenDonation }) => {
       {/* Hero Header Badge */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <span className="bg-red-500 text-zinc-950 font-black text-xs uppercase px-3 py-1 rounded-full font-mono flex items-center gap-1.5 shadow-[0_0_12px_rgba(239,68,68,0.25)]">
+          <span className="bg-red-500 text-white font-black text-xs uppercase px-3 py-1 rounded-full font-mono flex items-center gap-1.5 shadow-[0_0_12px_rgba(239,68,68,0.25)]">
             <Flame size={14} className="fill-current" />
             Mutirão Coletivo 2026
           </span>

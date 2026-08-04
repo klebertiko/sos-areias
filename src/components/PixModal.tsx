@@ -91,7 +91,7 @@ export const PixModal: React.FC<PixModalProps> = ({
         {/* Header */}
         <div className="p-4 sm:p-5 border-b border-zinc-800 flex justify-between items-center bg-zinc-950">
           <div className="flex items-center gap-2">
-            <div className="bg-red-500 text-zinc-950 p-2 rounded-xl">
+            <div className="bg-red-500 text-white p-2 rounded-xl">
               <Heart className="fill-current" size={20} />
             </div>
             <div>
@@ -123,7 +123,7 @@ export const PixModal: React.FC<PixModalProps> = ({
                   onClick={() => setAmount(preset)}
                   className={`py-2 rounded-xl font-mono font-bold text-xs sm:text-sm transition-all border ${
                     amount === preset
-                      ? 'bg-red-500 text-zinc-950 border-red-400 shadow-[0_0_10px_rgba(239,68,68,0.3)]'
+                      ? 'bg-red-500 text-white border-red-400 shadow-[0_0_10px_rgba(239,68,68,0.3)]'
                       : 'bg-zinc-950 text-zinc-300 border-zinc-800 hover:border-zinc-700'
                   }`}
                 >
@@ -192,7 +192,7 @@ export const PixModal: React.FC<PixModalProps> = ({
                 className={`py-2.5 px-3 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5 border ${
                   copied
                     ? 'bg-green-500/20 text-green-400 border-green-500/40'
-                    : 'bg-red-500 hover:bg-red-400 text-zinc-950 border-red-400 shadow-md font-extrabold'
+                    : 'bg-red-500 hover:bg-red-400 text-white border-red-400 shadow-md font-extrabold'
                 }`}
               >
                 {copied ? <CheckCircle2 size={15} /> : <QrCode size={15} />}
@@ -316,7 +316,7 @@ export const PixModal: React.FC<PixModalProps> = ({
             <button
               type="submit"
               disabled={simulating || numericAmount <= 0 || !agreedLgpd}
-              className="w-full bg-red-500 hover:bg-red-400 text-zinc-950 font-black py-3 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-[0_0_15px_rgba(239,68,68,0.2)] disabled:opacity-50 flex items-center justify-center gap-2 text-sm uppercase tracking-wide"
+              className="w-full bg-red-500 hover:bg-red-400 text-white font-black py-3 rounded-xl transition-all hover:scale-[1.01] active:scale-95 shadow-[0_0_15px_rgba(239,68,68,0.2)] disabled:opacity-50 flex items-center justify-center gap-2 text-sm uppercase tracking-wide"
             >
               {simulating ? (
                 <span className="font-mono text-xs animate-pulse">Registrando PIX...</span>

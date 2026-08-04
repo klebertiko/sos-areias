@@ -28,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         
         {/* Logo */}
         <div className="flex items-center gap-3">
-          <div className="bg-red-500 text-zinc-950 p-2 rounded-lg font-mono font-black text-xl shadow-[2px_2px_0px_#000] flex items-center justify-center">
+          <div className="bg-red-500 text-white p-2 rounded-lg font-mono font-black text-xl shadow-[2px_2px_0px_#000] flex items-center justify-center">
             <Hammer size={22} className="stroke-[2.5]" />
           </div>
           <div>
@@ -82,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => onOpenDonation()}
-            className="bg-red-500 hover:bg-red-400 text-zinc-950 font-black px-5 py-2.5 rounded-xl transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(239,68,68,0.25)] flex items-center gap-2 text-sm"
+            className="bg-red-500 hover:bg-red-400 text-white font-black px-5 py-2.5 rounded-xl transition-all hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(239,68,68,0.25)] flex items-center gap-2 text-sm"
           >
             <Heart size={18} className="fill-current" />
             <span>Apoiar PIX</span>

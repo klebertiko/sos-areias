@@ -52,7 +52,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
               onClick={() => setActiveTab(tab.id)}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold font-mono uppercase transition-colors border ${
                 activeTab === tab.id
-                  ? 'bg-red-500 text-zinc-950 border-red-500'
+                  ? 'bg-red-500 text-white border-red-500'
                   : 'bg-zinc-950 text-zinc-400 border-zinc-800 hover:text-white hover:border-zinc-700'
               }`}
             >
@@ -212,7 +212,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, pixKey, onCl
         <div className="pt-2 border-t border-zinc-800 text-right">
           <button
             onClick={onClose}
-            className="px-5 py-2.5 bg-red-500 hover:bg-red-400 text-zinc-950 font-black text-xs uppercase rounded-xl transition-all"
+            className="px-5 py-2.5 bg-red-500 hover:bg-red-400 text-white font-black text-xs uppercase rounded-xl transition-all"
           >
             Entendido, Fechar
           </button>
